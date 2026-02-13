@@ -20,7 +20,9 @@
       "Bash(powershell.exe -Command \"docker ps\")",
       "Bash(powershell.exe -Command \"Test-NetConnection -ComputerName localhost -Port 5432 -WarningAction SilentlyContinue | Select-Object TcpTestSucceeded\":*)",
       "Bash(npx eslint:*)",
-      "Bash(node --env-file=.env -e:*)"
+      "Bash(node --env-file=.env -e:*)",
+      "Bash(node -e:*)",
+      "Bash(set:*)"
     ]
   }
 }

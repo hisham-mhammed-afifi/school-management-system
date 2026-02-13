@@ -42,6 +42,12 @@ import { createRoomRoutes } from './modules/room/room.routes.ts';
 import { createLessonRoutes, createTimetableRoutes } from './modules/lesson/lesson.routes.ts';
 import { createSubstitutionRoutes } from './modules/substitution/substitution.routes.ts';
 
+// Phase 6 routes
+import { createTeacherAvailabilityRoutes } from './modules/teacher-availability/teacher-availability.routes.ts';
+import { createTeacherLeaveRoutes } from './modules/teacher-leave/teacher-leave.routes.ts';
+import { createStudentAttendanceRoutes } from './modules/student-attendance/student-attendance.routes.ts';
+import { createTeacherAttendanceRoutes } from './modules/teacher-attendance/teacher-attendance.routes.ts';
+
 export function createServer() {
   const app = express();
   const { controllers, prisma } = createContainer();
@@ -98,6 +104,12 @@ export function createServer() {
   app.use('/api/v1/lessons', createLessonRoutes(controllers.lessonController));
   app.use('/api/v1/timetable', createTimetableRoutes(controllers.lessonController));
   app.use('/api/v1/substitutions', createSubstitutionRoutes(controllers.substitutionController));
+
+  // ---- Phase 6: Daily Operations ----
+  app.use('/api/v1/teachers/:teacherId/availability', createTeacherAvailabilityRoutes(controllers.teacherAvailabilityController));
+  app.use('/api/v1/teacher-leaves', createTeacherLeaveRoutes(controllers.teacherLeaveController));
+  app.use('/api/v1/student-attendance', createStudentAttendanceRoutes(controllers.studentAttendanceController));
+  app.use('/api/v1/teacher-attendance', createTeacherAttendanceRoutes(controllers.teacherAttendanceController));
 
   // ---- 404 handler ----
   app.use((_req, res) => {

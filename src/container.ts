@@ -114,6 +114,26 @@ import { SubstitutionRepository } from './modules/substitution/substitution.repo
 import { SubstitutionService } from './modules/substitution/substitution.service.ts';
 import { SubstitutionController } from './modules/substitution/substitution.controller.ts';
 
+// Teacher Availability
+import { TeacherAvailabilityRepository } from './modules/teacher-availability/teacher-availability.repository.ts';
+import { TeacherAvailabilityService } from './modules/teacher-availability/teacher-availability.service.ts';
+import { TeacherAvailabilityController } from './modules/teacher-availability/teacher-availability.controller.ts';
+
+// Teacher Leave
+import { TeacherLeaveRepository } from './modules/teacher-leave/teacher-leave.repository.ts';
+import { TeacherLeaveService } from './modules/teacher-leave/teacher-leave.service.ts';
+import { TeacherLeaveController } from './modules/teacher-leave/teacher-leave.controller.ts';
+
+// Student Attendance
+import { StudentAttendanceRepository } from './modules/student-attendance/student-attendance.repository.ts';
+import { StudentAttendanceService } from './modules/student-attendance/student-attendance.service.ts';
+import { StudentAttendanceController } from './modules/student-attendance/student-attendance.controller.ts';
+
+// Teacher Attendance
+import { TeacherAttendanceRepository } from './modules/teacher-attendance/teacher-attendance.repository.ts';
+import { TeacherAttendanceService } from './modules/teacher-attendance/teacher-attendance.service.ts';
+import { TeacherAttendanceController } from './modules/teacher-attendance/teacher-attendance.controller.ts';
+
 export function createContainer() {
   // Phase 1
   const schoolRepo = new SchoolRepository(prisma);
@@ -211,6 +231,23 @@ export function createContainer() {
   const substitutionService = new SubstitutionService(substitutionRepo, prisma);
   const substitutionController = new SubstitutionController(substitutionService);
 
+  // Phase 6
+  const teacherAvailabilityRepo = new TeacherAvailabilityRepository(prisma);
+  const teacherAvailabilityService = new TeacherAvailabilityService(teacherAvailabilityRepo);
+  const teacherAvailabilityController = new TeacherAvailabilityController(teacherAvailabilityService);
+
+  const teacherLeaveRepo = new TeacherLeaveRepository(prisma);
+  const teacherLeaveService = new TeacherLeaveService(teacherLeaveRepo);
+  const teacherLeaveController = new TeacherLeaveController(teacherLeaveService);
+
+  const studentAttendanceRepo = new StudentAttendanceRepository(prisma);
+  const studentAttendanceService = new StudentAttendanceService(studentAttendanceRepo);
+  const studentAttendanceController = new StudentAttendanceController(studentAttendanceService);
+
+  const teacherAttendanceRepo = new TeacherAttendanceRepository(prisma);
+  const teacherAttendanceService = new TeacherAttendanceService(teacherAttendanceRepo);
+  const teacherAttendanceController = new TeacherAttendanceController(teacherAttendanceService);
+
   return {
     prisma,
     controllers: {
@@ -237,6 +274,10 @@ export function createContainer() {
       roomController,
       lessonController,
       substitutionController,
+      teacherAvailabilityController,
+      teacherLeaveController,
+      studentAttendanceController,
+      teacherAttendanceController,
     },
   } as const;
 }
