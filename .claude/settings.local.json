@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(where:*)",
+      "Bash(nvm list:*)",
+      "Bash(npx prisma init:*)",
+      "Bash(npx prisma validate:*)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm ls:*)",
+      "Bash(grep:*)",
+      "Bash(docker compose:*)",
+      "Bash(cmd /c \"where docker\")",
+      "Bash(cmd /c \"docker compose -f D:\\\\POCs\\\\school-management\\\\docker-compose.yml up -d\")",
+      "Bash(cmd /c \"docker ps\")",
+      "Bash(\"/mnt/c/Program Files/Docker/Docker/resources/bin/docker.exe\" ps)",
+      "Bash(\"C:\\\\Program Files\\\\Docker\\\\Docker\\\\resources\\\\bin\\\\docker.exe\" ps)",
+      "Bash(powershell.exe -Command \"docker ps\")",
+      "Bash(powershell.exe -Command \"Test-NetConnection -ComputerName localhost -Port 5432 -WarningAction SilentlyContinue | Select-Object TcpTestSucceeded\":*)",
+      "Bash(npx eslint:*)",
+      "Bash(node --env-file=.env -e:*)"
+    ]
+  }
+}

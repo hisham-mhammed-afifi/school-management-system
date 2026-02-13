@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+.env.test
+*.tsbuildinfo
+coverage/
+uploads/
+test-uploads/
+
+/src/generated/prisma
