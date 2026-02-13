@@ -48,6 +48,13 @@ import { createTeacherLeaveRoutes } from './modules/teacher-leave/teacher-leave.
 import { createStudentAttendanceRoutes } from './modules/student-attendance/student-attendance.routes.ts';
 import { createTeacherAttendanceRoutes } from './modules/teacher-attendance/teacher-attendance.routes.ts';
 
+// Phase 7 routes
+import { createGradingScaleRoutes } from './modules/grading-scale/grading-scale.routes.ts';
+import { createExamRoutes } from './modules/exam/exam.routes.ts';
+import { createExamSubjectRoutes } from './modules/exam-subject/exam-subject.routes.ts';
+import { createStudentGradeRoutes } from './modules/student-grade/student-grade.routes.ts';
+import { createReportCardRoutes } from './modules/report-card/report-card.routes.ts';
+
 export function createServer() {
   const app = express();
   const { controllers, prisma } = createContainer();
@@ -110,6 +117,13 @@ export function createServer() {
   app.use('/api/v1/teacher-leaves', createTeacherLeaveRoutes(controllers.teacherLeaveController));
   app.use('/api/v1/student-attendance', createStudentAttendanceRoutes(controllers.studentAttendanceController));
   app.use('/api/v1/teacher-attendance', createTeacherAttendanceRoutes(controllers.teacherAttendanceController));
+
+  // ---- Phase 7: Assessment ----
+  app.use('/api/v1/grading-scales', createGradingScaleRoutes(controllers.gradingScaleController));
+  app.use('/api/v1/exams', createExamRoutes(controllers.examController));
+  app.use('/api/v1/exams/:examId/subjects', createExamSubjectRoutes(controllers.examSubjectController));
+  app.use('/api/v1/grades', createStudentGradeRoutes(controllers.studentGradeController));
+  app.use('/api/v1/report-cards', createReportCardRoutes(controllers.reportCardController));
 
   // ---- 404 handler ----
   app.use((_req, res) => {

@@ -134,6 +134,31 @@ import { TeacherAttendanceRepository } from './modules/teacher-attendance/teache
 import { TeacherAttendanceService } from './modules/teacher-attendance/teacher-attendance.service.ts';
 import { TeacherAttendanceController } from './modules/teacher-attendance/teacher-attendance.controller.ts';
 
+// Grading Scale
+import { GradingScaleRepository } from './modules/grading-scale/grading-scale.repository.ts';
+import { GradingScaleService } from './modules/grading-scale/grading-scale.service.ts';
+import { GradingScaleController } from './modules/grading-scale/grading-scale.controller.ts';
+
+// Exam
+import { ExamRepository } from './modules/exam/exam.repository.ts';
+import { ExamService } from './modules/exam/exam.service.ts';
+import { ExamController } from './modules/exam/exam.controller.ts';
+
+// Exam Subject
+import { ExamSubjectRepository } from './modules/exam-subject/exam-subject.repository.ts';
+import { ExamSubjectService } from './modules/exam-subject/exam-subject.service.ts';
+import { ExamSubjectController } from './modules/exam-subject/exam-subject.controller.ts';
+
+// Student Grade
+import { StudentGradeRepository } from './modules/student-grade/student-grade.repository.ts';
+import { StudentGradeService } from './modules/student-grade/student-grade.service.ts';
+import { StudentGradeController } from './modules/student-grade/student-grade.controller.ts';
+
+// Report Card
+import { ReportCardRepository } from './modules/report-card/report-card.repository.ts';
+import { ReportCardService } from './modules/report-card/report-card.service.ts';
+import { ReportCardController } from './modules/report-card/report-card.controller.ts';
+
 export function createContainer() {
   // Phase 1
   const schoolRepo = new SchoolRepository(prisma);
@@ -248,6 +273,27 @@ export function createContainer() {
   const teacherAttendanceService = new TeacherAttendanceService(teacherAttendanceRepo);
   const teacherAttendanceController = new TeacherAttendanceController(teacherAttendanceService);
 
+  // Phase 7
+  const gradingScaleRepo = new GradingScaleRepository(prisma);
+  const gradingScaleService = new GradingScaleService(gradingScaleRepo);
+  const gradingScaleController = new GradingScaleController(gradingScaleService);
+
+  const examRepo = new ExamRepository(prisma);
+  const examService = new ExamService(examRepo);
+  const examController = new ExamController(examService);
+
+  const examSubjectRepo = new ExamSubjectRepository(prisma);
+  const examSubjectService = new ExamSubjectService(examSubjectRepo);
+  const examSubjectController = new ExamSubjectController(examSubjectService);
+
+  const studentGradeRepo = new StudentGradeRepository(prisma);
+  const studentGradeService = new StudentGradeService(studentGradeRepo);
+  const studentGradeController = new StudentGradeController(studentGradeService);
+
+  const reportCardRepo = new ReportCardRepository(prisma);
+  const reportCardService = new ReportCardService(reportCardRepo);
+  const reportCardController = new ReportCardController(reportCardService);
+
   return {
     prisma,
     controllers: {
@@ -278,6 +324,11 @@ export function createContainer() {
       teacherLeaveController,
       studentAttendanceController,
       teacherAttendanceController,
+      gradingScaleController,
+      examController,
+      examSubjectController,
+      studentGradeController,
+      reportCardController,
     },
   } as const;
 }
