@@ -79,6 +79,31 @@ import { TeacherRepository } from './modules/teacher/teacher.repository.ts';
 import { TeacherService } from './modules/teacher/teacher.service.ts';
 import { TeacherController } from './modules/teacher/teacher.controller.ts';
 
+// Period Set
+import { PeriodSetRepository } from './modules/period-set/period-set.repository.ts';
+import { PeriodSetService } from './modules/period-set/period-set.service.ts';
+import { PeriodSetController } from './modules/period-set/period-set.controller.ts';
+
+// Working Day
+import { WorkingDayRepository } from './modules/working-day/working-day.repository.ts';
+import { WorkingDayService } from './modules/working-day/working-day.service.ts';
+import { WorkingDayController } from './modules/working-day/working-day.controller.ts';
+
+// Period
+import { PeriodRepository } from './modules/period/period.repository.ts';
+import { PeriodService } from './modules/period/period.service.ts';
+import { PeriodController } from './modules/period/period.controller.ts';
+
+// Time Slot
+import { TimeSlotRepository } from './modules/time-slot/time-slot.repository.ts';
+import { TimeSlotService } from './modules/time-slot/time-slot.service.ts';
+import { TimeSlotController } from './modules/time-slot/time-slot.controller.ts';
+
+// Room
+import { RoomRepository } from './modules/room/room.repository.ts';
+import { RoomService } from './modules/room/room.service.ts';
+import { RoomController } from './modules/room/room.controller.ts';
+
 export function createContainer() {
   // Phase 1
   const schoolRepo = new SchoolRepository(prisma);
@@ -146,6 +171,27 @@ export function createContainer() {
   const teacherService = new TeacherService(teacherRepo);
   const teacherController = new TeacherController(teacherService);
 
+  // Phase 4
+  const periodSetRepo = new PeriodSetRepository(prisma);
+  const periodSetService = new PeriodSetService(periodSetRepo);
+  const periodSetController = new PeriodSetController(periodSetService);
+
+  const workingDayRepo = new WorkingDayRepository(prisma);
+  const workingDayService = new WorkingDayService(workingDayRepo, periodSetRepo);
+  const workingDayController = new WorkingDayController(workingDayService);
+
+  const periodRepo = new PeriodRepository(prisma);
+  const periodService = new PeriodService(periodRepo, periodSetRepo);
+  const periodController = new PeriodController(periodService);
+
+  const timeSlotRepo = new TimeSlotRepository(prisma);
+  const timeSlotService = new TimeSlotService(timeSlotRepo, periodSetRepo);
+  const timeSlotController = new TimeSlotController(timeSlotService);
+
+  const roomRepo = new RoomRepository(prisma);
+  const roomService = new RoomService(roomRepo);
+  const roomController = new RoomController(roomService);
+
   return {
     prisma,
     controllers: {
@@ -165,6 +211,11 @@ export function createContainer() {
       studentGuardianController,
       enrollmentController,
       teacherController,
+      periodSetController,
+      workingDayController,
+      periodController,
+      timeSlotController,
+      roomController,
     },
   } as const;
 }

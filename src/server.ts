@@ -31,6 +31,13 @@ import { createStudentGuardianRoutes } from './modules/student-guardian/student-
 import { createEnrollmentRoutes } from './modules/enrollment/enrollment.routes.ts';
 import { createTeacherRoutes } from './modules/teacher/teacher.routes.ts';
 
+// Phase 4 routes
+import { createPeriodSetRoutes } from './modules/period-set/period-set.routes.ts';
+import { createWorkingDayRoutes } from './modules/working-day/working-day.routes.ts';
+import { createPeriodRoutes } from './modules/period/period.routes.ts';
+import { createTimeSlotRoutes } from './modules/time-slot/time-slot.routes.ts';
+import { createRoomRoutes } from './modules/room/room.routes.ts';
+
 export function createServer() {
   const app = express();
   const { controllers, prisma } = createContainer();
@@ -75,6 +82,13 @@ export function createServer() {
   app.use('/api/v1/guardians', createGuardianRoutes(controllers.guardianController));
   app.use('/api/v1/enrollments', createEnrollmentRoutes(controllers.enrollmentController));
   app.use('/api/v1/teachers', createTeacherRoutes(controllers.teacherController));
+
+  // ---- Phase 4: Time & Space ----
+  app.use('/api/v1/period-sets', createPeriodSetRoutes(controllers.periodSetController));
+  app.use('/api/v1/period-sets/:setId/working-days', createWorkingDayRoutes(controllers.workingDayController));
+  app.use('/api/v1/period-sets/:setId/periods', createPeriodRoutes(controllers.periodController));
+  app.use('/api/v1/period-sets/:setId/time-slots', createTimeSlotRoutes(controllers.timeSlotController));
+  app.use('/api/v1/rooms', createRoomRoutes(controllers.roomController));
 
   // ---- 404 handler ----
   app.use((_req, res) => {
