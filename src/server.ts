@@ -38,6 +38,10 @@ import { createPeriodRoutes } from './modules/period/period.routes.ts';
 import { createTimeSlotRoutes } from './modules/time-slot/time-slot.routes.ts';
 import { createRoomRoutes } from './modules/room/room.routes.ts';
 
+// Phase 5 routes
+import { createLessonRoutes, createTimetableRoutes } from './modules/lesson/lesson.routes.ts';
+import { createSubstitutionRoutes } from './modules/substitution/substitution.routes.ts';
+
 export function createServer() {
   const app = express();
   const { controllers, prisma } = createContainer();
@@ -89,6 +93,11 @@ export function createServer() {
   app.use('/api/v1/period-sets/:setId/periods', createPeriodRoutes(controllers.periodController));
   app.use('/api/v1/period-sets/:setId/time-slots', createTimeSlotRoutes(controllers.timeSlotController));
   app.use('/api/v1/rooms', createRoomRoutes(controllers.roomController));
+
+  // ---- Phase 5: Scheduling ----
+  app.use('/api/v1/lessons', createLessonRoutes(controllers.lessonController));
+  app.use('/api/v1/timetable', createTimetableRoutes(controllers.lessonController));
+  app.use('/api/v1/substitutions', createSubstitutionRoutes(controllers.substitutionController));
 
   // ---- 404 handler ----
   app.use((_req, res) => {

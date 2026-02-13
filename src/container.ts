@@ -104,6 +104,16 @@ import { RoomRepository } from './modules/room/room.repository.ts';
 import { RoomService } from './modules/room/room.service.ts';
 import { RoomController } from './modules/room/room.controller.ts';
 
+// Lesson
+import { LessonRepository } from './modules/lesson/lesson.repository.ts';
+import { LessonService } from './modules/lesson/lesson.service.ts';
+import { LessonController } from './modules/lesson/lesson.controller.ts';
+
+// Substitution
+import { SubstitutionRepository } from './modules/substitution/substitution.repository.ts';
+import { SubstitutionService } from './modules/substitution/substitution.service.ts';
+import { SubstitutionController } from './modules/substitution/substitution.controller.ts';
+
 export function createContainer() {
   // Phase 1
   const schoolRepo = new SchoolRepository(prisma);
@@ -192,6 +202,15 @@ export function createContainer() {
   const roomService = new RoomService(roomRepo);
   const roomController = new RoomController(roomService);
 
+  // Phase 5
+  const lessonRepo = new LessonRepository(prisma);
+  const lessonService = new LessonService(lessonRepo, prisma);
+  const lessonController = new LessonController(lessonService);
+
+  const substitutionRepo = new SubstitutionRepository(prisma);
+  const substitutionService = new SubstitutionService(substitutionRepo, prisma);
+  const substitutionController = new SubstitutionController(substitutionService);
+
   return {
     prisma,
     controllers: {
@@ -216,6 +235,8 @@ export function createContainer() {
       periodController,
       timeSlotController,
       roomController,
+      lessonController,
+      substitutionController,
     },
   } as const;
 }
