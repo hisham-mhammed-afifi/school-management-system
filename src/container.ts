@@ -159,6 +159,36 @@ import { ReportCardRepository } from './modules/report-card/report-card.reposito
 import { ReportCardService } from './modules/report-card/report-card.service.ts';
 import { ReportCardController } from './modules/report-card/report-card.controller.ts';
 
+// Fee Category
+import { FeeCategoryRepository } from './modules/fee-category/fee-category.repository.ts';
+import { FeeCategoryService } from './modules/fee-category/fee-category.service.ts';
+import { FeeCategoryController } from './modules/fee-category/fee-category.controller.ts';
+
+// Fee Structure
+import { FeeStructureRepository } from './modules/fee-structure/fee-structure.repository.ts';
+import { FeeStructureService } from './modules/fee-structure/fee-structure.service.ts';
+import { FeeStructureController } from './modules/fee-structure/fee-structure.controller.ts';
+
+// Fee Discount
+import { FeeDiscountRepository } from './modules/fee-discount/fee-discount.repository.ts';
+import { FeeDiscountService } from './modules/fee-discount/fee-discount.service.ts';
+import { FeeDiscountController } from './modules/fee-discount/fee-discount.controller.ts';
+
+// Fee Invoice
+import { FeeInvoiceRepository } from './modules/fee-invoice/fee-invoice.repository.ts';
+import { FeeInvoiceService } from './modules/fee-invoice/fee-invoice.service.ts';
+import { FeeInvoiceController } from './modules/fee-invoice/fee-invoice.controller.ts';
+
+// Fee Payment
+import { FeePaymentRepository } from './modules/fee-payment/fee-payment.repository.ts';
+import { FeePaymentService } from './modules/fee-payment/fee-payment.service.ts';
+import { FeePaymentController } from './modules/fee-payment/fee-payment.controller.ts';
+
+// Financial Report
+import { FinancialReportRepository } from './modules/financial-report/financial-report.repository.ts';
+import { FinancialReportService } from './modules/financial-report/financial-report.service.ts';
+import { FinancialReportController } from './modules/financial-report/financial-report.controller.ts';
+
 export function createContainer() {
   // Phase 1
   const schoolRepo = new SchoolRepository(prisma);
@@ -294,6 +324,31 @@ export function createContainer() {
   const reportCardService = new ReportCardService(reportCardRepo);
   const reportCardController = new ReportCardController(reportCardService);
 
+  // Phase 8
+  const feeCategoryRepo = new FeeCategoryRepository(prisma);
+  const feeCategoryService = new FeeCategoryService(feeCategoryRepo);
+  const feeCategoryController = new FeeCategoryController(feeCategoryService);
+
+  const feeStructureRepo = new FeeStructureRepository(prisma);
+  const feeStructureService = new FeeStructureService(feeStructureRepo);
+  const feeStructureController = new FeeStructureController(feeStructureService);
+
+  const feeDiscountRepo = new FeeDiscountRepository(prisma);
+  const feeDiscountService = new FeeDiscountService(feeDiscountRepo);
+  const feeDiscountController = new FeeDiscountController(feeDiscountService);
+
+  const feeInvoiceRepo = new FeeInvoiceRepository(prisma);
+  const feeInvoiceService = new FeeInvoiceService(feeInvoiceRepo);
+  const feeInvoiceController = new FeeInvoiceController(feeInvoiceService);
+
+  const feePaymentRepo = new FeePaymentRepository(prisma);
+  const feePaymentService = new FeePaymentService(feePaymentRepo);
+  const feePaymentController = new FeePaymentController(feePaymentService);
+
+  const financialReportRepo = new FinancialReportRepository(prisma);
+  const financialReportService = new FinancialReportService(financialReportRepo);
+  const financialReportController = new FinancialReportController(financialReportService);
+
   return {
     prisma,
     controllers: {
@@ -329,6 +384,12 @@ export function createContainer() {
       examSubjectController,
       studentGradeController,
       reportCardController,
+      feeCategoryController,
+      feeStructureController,
+      feeDiscountController,
+      feeInvoiceController,
+      feePaymentController,
+      financialReportController,
     },
   } as const;
 }

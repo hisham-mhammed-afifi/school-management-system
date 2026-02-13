@@ -55,6 +55,14 @@ import { createExamSubjectRoutes } from './modules/exam-subject/exam-subject.rou
 import { createStudentGradeRoutes } from './modules/student-grade/student-grade.routes.ts';
 import { createReportCardRoutes } from './modules/report-card/report-card.routes.ts';
 
+// Phase 8 routes
+import { createFeeCategoryRoutes } from './modules/fee-category/fee-category.routes.ts';
+import { createFeeStructureRoutes } from './modules/fee-structure/fee-structure.routes.ts';
+import { createFeeDiscountRoutes } from './modules/fee-discount/fee-discount.routes.ts';
+import { createFeeInvoiceRoutes } from './modules/fee-invoice/fee-invoice.routes.ts';
+import { createFeePaymentRoutes } from './modules/fee-payment/fee-payment.routes.ts';
+import { createFinancialReportRoutes } from './modules/financial-report/financial-report.routes.ts';
+
 export function createServer() {
   const app = express();
   const { controllers, prisma } = createContainer();
@@ -124,6 +132,14 @@ export function createServer() {
   app.use('/api/v1/exams/:examId/subjects', createExamSubjectRoutes(controllers.examSubjectController));
   app.use('/api/v1/grades', createStudentGradeRoutes(controllers.studentGradeController));
   app.use('/api/v1/report-cards', createReportCardRoutes(controllers.reportCardController));
+
+  // ---- Phase 8: Finance ----
+  app.use('/api/v1/fee-categories', createFeeCategoryRoutes(controllers.feeCategoryController));
+  app.use('/api/v1/fee-structures', createFeeStructureRoutes(controllers.feeStructureController));
+  app.use('/api/v1/fee-discounts', createFeeDiscountRoutes(controllers.feeDiscountController));
+  app.use('/api/v1/fee-invoices', createFeeInvoiceRoutes(controllers.feeInvoiceController));
+  app.use('/api/v1/fee-payments', createFeePaymentRoutes(controllers.feePaymentController));
+  app.use('/api/v1/reports/fees', createFinancialReportRoutes(controllers.financialReportController));
 
   // ---- 404 handler ----
   app.use((_req, res) => {
