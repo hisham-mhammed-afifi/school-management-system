@@ -204,6 +204,21 @@ import { AcademicEventRepository } from './modules/academic-event/academic-event
 import { AcademicEventService } from './modules/academic-event/academic-event.service.ts';
 import { AcademicEventController } from './modules/academic-event/academic-event.controller.ts';
 
+// Audit Log
+import { AuditLogRepository } from './modules/audit-log/audit-log.repository.ts';
+import { AuditLogService } from './modules/audit-log/audit-log.service.ts';
+import { AuditLogController } from './modules/audit-log/audit-log.controller.ts';
+
+// Self-Service
+import { SelfServiceRepository } from './modules/self-service/self-service.repository.ts';
+import { SelfServiceService } from './modules/self-service/self-service.service.ts';
+import { SelfServiceController } from './modules/self-service/self-service.controller.ts';
+
+// Dashboard
+import { DashboardRepository } from './modules/dashboard/dashboard.repository.ts';
+import { DashboardService } from './modules/dashboard/dashboard.service.ts';
+import { DashboardController } from './modules/dashboard/dashboard.controller.ts';
+
 export function createContainer() {
   // Phase 1
   const schoolRepo = new SchoolRepository(prisma);
@@ -377,6 +392,19 @@ export function createContainer() {
   const academicEventService = new AcademicEventService(academicEventRepo);
   const academicEventController = new AcademicEventController(academicEventService);
 
+  // Phase 10
+  const auditLogRepo = new AuditLogRepository(prisma);
+  const auditLogService = new AuditLogService(auditLogRepo);
+  const auditLogController = new AuditLogController(auditLogService);
+
+  const selfServiceRepo = new SelfServiceRepository(prisma);
+  const selfServiceService = new SelfServiceService(selfServiceRepo);
+  const selfServiceController = new SelfServiceController(selfServiceService);
+
+  const dashboardRepo = new DashboardRepository(prisma);
+  const dashboardService = new DashboardService(dashboardRepo);
+  const dashboardController = new DashboardController(dashboardService);
+
   return {
     prisma,
     controllers: {
@@ -421,6 +449,9 @@ export function createContainer() {
       announcementController,
       notificationController,
       academicEventController,
+      auditLogController,
+      selfServiceController,
+      dashboardController,
     },
   } as const;
 }

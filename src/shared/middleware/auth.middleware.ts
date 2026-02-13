@@ -3,6 +3,7 @@ import * as jose from 'jose';
 import { AppError } from '../errors/app-error.ts';
 import { env } from '../../config/env.ts';
 import type { JwtPayload } from '../types/index.ts';
+import { updateRequestContext } from '../context/request-context.ts';
 
 const JWT_SECRET = new TextEncoder().encode(env.JWT_SECRET);
 
@@ -19,7 +20,9 @@ export async function authenticate(
   const token = header.slice(7);
   try {
     const { payload } = await jose.jwtVerify(token, JWT_SECRET);
-    (req as unknown as Record<string, unknown>)['user'] = payload as unknown as JwtPayload;
+    const user = payload as unknown as JwtPayload;
+    (req as unknown as Record<string, unknown>)['user'] = user;
+    updateRequestContext({ userId: user.sub, schoolId: user.schoolId });
     next();
   } catch {
     throw new AppError('Invalid or expired token', 401, 'INVALID_TOKEN');

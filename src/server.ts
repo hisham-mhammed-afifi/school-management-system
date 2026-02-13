@@ -6,6 +6,7 @@ import { env } from './config/env.ts';
 import { logger } from './shared/utils/logger.ts';
 import { errorHandler } from './shared/errors/error-handler.ts';
 import { requestId } from './shared/middleware/request-id.middleware.ts';
+import { auditContext } from './shared/middleware/audit-context.middleware.ts';
 import { createContainer } from './container.ts';
 
 // Phase 1 routes
@@ -68,6 +69,11 @@ import { createAnnouncementRoutes } from './modules/announcement/announcement.ro
 import { createNotificationRoutes } from './modules/notification/notification.routes.ts';
 import { createAcademicEventRoutes } from './modules/academic-event/academic-event.routes.ts';
 
+// Phase 10 routes
+import { createAuditLogRoutes } from './modules/audit-log/audit-log.routes.ts';
+import { createSelfServiceRoutes } from './modules/self-service/self-service.routes.ts';
+import { createDashboardRoutes, createPlatformDashboardRoutes } from './modules/dashboard/dashboard.routes.ts';
+
 export function createServer() {
   const app = express();
   const { controllers, prisma } = createContainer();
@@ -81,6 +87,7 @@ export function createServer() {
   app.use(
     pinoHttp({ logger, autoLogging: { ignore: (req) => req.url === '/health' } }),
   );
+  app.use(auditContext);
 
   // ---- Health check ----
   app.get('/health', (_req, res) => {
@@ -150,6 +157,12 @@ export function createServer() {
   app.use('/api/v1/announcements', createAnnouncementRoutes(controllers.announcementController));
   app.use('/api/v1/notifications', createNotificationRoutes(controllers.notificationController));
   app.use('/api/v1/academic-events', createAcademicEventRoutes(controllers.academicEventController));
+
+  // ---- Phase 10: Audit, Self-Service & Dashboard ----
+  app.use('/api/v1/audit-logs', createAuditLogRoutes(controllers.auditLogController));
+  app.use('/api/v1/my', createSelfServiceRoutes(controllers.selfServiceController));
+  app.use('/api/v1/dashboard', createDashboardRoutes(controllers.dashboardController));
+  app.use('/api/v1/platform', createPlatformDashboardRoutes(controllers.dashboardController));
 
   // ---- 404 handler ----
   app.use((_req, res) => {
