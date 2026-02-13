@@ -63,6 +63,11 @@ import { createFeeInvoiceRoutes } from './modules/fee-invoice/fee-invoice.routes
 import { createFeePaymentRoutes } from './modules/fee-payment/fee-payment.routes.ts';
 import { createFinancialReportRoutes } from './modules/financial-report/financial-report.routes.ts';
 
+// Phase 9 routes
+import { createAnnouncementRoutes } from './modules/announcement/announcement.routes.ts';
+import { createNotificationRoutes } from './modules/notification/notification.routes.ts';
+import { createAcademicEventRoutes } from './modules/academic-event/academic-event.routes.ts';
+
 export function createServer() {
   const app = express();
   const { controllers, prisma } = createContainer();
@@ -140,6 +145,11 @@ export function createServer() {
   app.use('/api/v1/fee-invoices', createFeeInvoiceRoutes(controllers.feeInvoiceController));
   app.use('/api/v1/fee-payments', createFeePaymentRoutes(controllers.feePaymentController));
   app.use('/api/v1/reports/fees', createFinancialReportRoutes(controllers.financialReportController));
+
+  // ---- Phase 9: Communication & Calendar ----
+  app.use('/api/v1/announcements', createAnnouncementRoutes(controllers.announcementController));
+  app.use('/api/v1/notifications', createNotificationRoutes(controllers.notificationController));
+  app.use('/api/v1/academic-events', createAcademicEventRoutes(controllers.academicEventController));
 
   // ---- 404 handler ----
   app.use((_req, res) => {

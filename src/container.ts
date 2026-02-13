@@ -189,6 +189,21 @@ import { FinancialReportRepository } from './modules/financial-report/financial-
 import { FinancialReportService } from './modules/financial-report/financial-report.service.ts';
 import { FinancialReportController } from './modules/financial-report/financial-report.controller.ts';
 
+// Announcement
+import { AnnouncementRepository } from './modules/announcement/announcement.repository.ts';
+import { AnnouncementService } from './modules/announcement/announcement.service.ts';
+import { AnnouncementController } from './modules/announcement/announcement.controller.ts';
+
+// Notification
+import { NotificationRepository } from './modules/notification/notification.repository.ts';
+import { NotificationService } from './modules/notification/notification.service.ts';
+import { NotificationController } from './modules/notification/notification.controller.ts';
+
+// Academic Event
+import { AcademicEventRepository } from './modules/academic-event/academic-event.repository.ts';
+import { AcademicEventService } from './modules/academic-event/academic-event.service.ts';
+import { AcademicEventController } from './modules/academic-event/academic-event.controller.ts';
+
 export function createContainer() {
   // Phase 1
   const schoolRepo = new SchoolRepository(prisma);
@@ -349,6 +364,19 @@ export function createContainer() {
   const financialReportService = new FinancialReportService(financialReportRepo);
   const financialReportController = new FinancialReportController(financialReportService);
 
+  // Phase 9
+  const announcementRepo = new AnnouncementRepository(prisma);
+  const announcementService = new AnnouncementService(announcementRepo);
+  const announcementController = new AnnouncementController(announcementService);
+
+  const notificationRepo = new NotificationRepository(prisma);
+  const notificationService = new NotificationService(notificationRepo);
+  const notificationController = new NotificationController(notificationService);
+
+  const academicEventRepo = new AcademicEventRepository(prisma);
+  const academicEventService = new AcademicEventService(academicEventRepo);
+  const academicEventController = new AcademicEventController(academicEventService);
+
   return {
     prisma,
     controllers: {
@@ -390,6 +418,9 @@ export function createContainer() {
       feeInvoiceController,
       feePaymentController,
       financialReportController,
+      announcementController,
+      notificationController,
+      academicEventController,
     },
   } as const;
 }
