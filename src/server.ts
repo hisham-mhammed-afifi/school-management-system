@@ -8,12 +8,28 @@ import { errorHandler } from './shared/errors/error-handler.ts';
 import { requestId } from './shared/middleware/request-id.middleware.ts';
 import { createContainer } from './container.ts';
 
-// Route factories
+// Phase 1 routes
 import { createPlatformSchoolRoutes, createSchoolProfileRoutes } from './modules/school/school.routes.ts';
 import { createAuthRoutes } from './modules/auth/auth.routes.ts';
 import { createUserRoutes } from './modules/user/user.routes.ts';
 import { createRoleRoutes } from './modules/role/role.routes.ts';
 import { createPermissionRoutes } from './modules/permission/permission.routes.ts';
+
+// Phase 2 routes
+import { createAcademicYearRoutes } from './modules/academic-year/academic-year.routes.ts';
+import { createTermNestedRoutes, createTermRoutes } from './modules/term/term.routes.ts';
+import { createDepartmentRoutes } from './modules/department/department.routes.ts';
+import { createGradeRoutes } from './modules/grade/grade.routes.ts';
+import { createSubjectRoutes, createGradeSubjectsRoutes } from './modules/subject/subject.routes.ts';
+import { createClassSectionRoutes } from './modules/class-section/class-section.routes.ts';
+import { createRequirementRoutes } from './modules/requirement/requirement.routes.ts';
+
+// Phase 3 routes
+import { createStudentRoutes } from './modules/student/student.routes.ts';
+import { createGuardianRoutes } from './modules/guardian/guardian.routes.ts';
+import { createStudentGuardianRoutes } from './modules/student-guardian/student-guardian.routes.ts';
+import { createEnrollmentRoutes } from './modules/enrollment/enrollment.routes.ts';
+import { createTeacherRoutes } from './modules/teacher/teacher.routes.ts';
 
 export function createServer() {
   const app = express();
@@ -34,24 +50,31 @@ export function createServer() {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
   });
 
-  // ---- API routes ----
-  // Platform (super admin)
+  // ---- Phase 1: API routes ----
   app.use('/api/v1/platform/schools', createPlatformSchoolRoutes(controllers.schoolController));
-
-  // School profile (school admin)
   app.use('/api/v1/school/profile', createSchoolProfileRoutes(controllers.schoolController));
-
-  // Auth
   app.use('/api/v1/auth', createAuthRoutes(controllers.authController));
-
-  // Users
   app.use('/api/v1/users', createUserRoutes(controllers.userController));
-
-  // Roles
   app.use('/api/v1/roles', createRoleRoutes(controllers.roleController));
-
-  // Permissions
   app.use('/api/v1/permissions', createPermissionRoutes(prisma));
+
+  // ---- Phase 2: Academic Structure ----
+  app.use('/api/v1/academic-years', createAcademicYearRoutes(controllers.academicYearController));
+  app.use('/api/v1/academic-years/:yearId/terms', createTermNestedRoutes(controllers.termController));
+  app.use('/api/v1/terms', createTermRoutes(controllers.termController));
+  app.use('/api/v1/departments', createDepartmentRoutes(controllers.departmentController));
+  app.use('/api/v1/grades', createGradeRoutes(controllers.gradeController));
+  app.use('/api/v1/grades/:gradeId/subjects', createGradeSubjectsRoutes(controllers.subjectController));
+  app.use('/api/v1/subjects', createSubjectRoutes(controllers.subjectController));
+  app.use('/api/v1/class-sections', createClassSectionRoutes(controllers.classSectionController));
+  app.use('/api/v1/class-sections/:sectionId/requirements', createRequirementRoutes(controllers.requirementController));
+
+  // ---- Phase 3: People ----
+  app.use('/api/v1/students', createStudentRoutes(controllers.studentController));
+  app.use('/api/v1/students/:studentId/guardians', createStudentGuardianRoutes(controllers.studentGuardianController));
+  app.use('/api/v1/guardians', createGuardianRoutes(controllers.guardianController));
+  app.use('/api/v1/enrollments', createEnrollmentRoutes(controllers.enrollmentController));
+  app.use('/api/v1/teachers', createTeacherRoutes(controllers.teacherController));
 
   // ---- 404 handler ----
   app.use((_req, res) => {
