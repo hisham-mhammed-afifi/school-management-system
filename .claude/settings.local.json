@@ -23,7 +23,12 @@
       "Bash(node --env-file=.env -e:*)",
       "Bash(node -e:*)",
       "Bash(set:*)",
-      "Bash(ls -la \"D:\\\\POCs\\\\school-management\\\\docs\"\" 2>nul || echo \"docs folder not found \")"
+      "Bash(ls -la \"D:\\\\POCs\\\\school-management\\\\docs\"\" 2>nul || echo \"docs folder not found \")",
+      "Bash(test:*)",
+      "Bash(echo:*)",
+      "Bash(dir:*)",
+      "Bash(xargs:*)",
+      "Bash(done)"
     ]
   }
 }

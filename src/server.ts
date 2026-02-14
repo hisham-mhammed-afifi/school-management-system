@@ -74,6 +74,10 @@ import { createAuditLogRoutes } from './modules/audit-log/audit-log.routes.ts';
 import { createSelfServiceRoutes } from './modules/self-service/self-service.routes.ts';
 import { createDashboardRoutes, createPlatformDashboardRoutes } from './modules/dashboard/dashboard.routes.ts';
 
+// Swagger
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './config/swagger.ts';
+
 export function createServer() {
   const app = express();
   const { controllers, prisma } = createContainer();
@@ -92,6 +96,12 @@ export function createServer() {
   // ---- Health check ----
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  });
+
+  // ---- API Documentation ----
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.get('/api-docs.json', (_req, res) => {
+    res.json(swaggerSpec);
   });
 
   // ---- Phase 1: API routes ----

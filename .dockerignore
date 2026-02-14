@@ -1,0 +1,14 @@
+node_modules
+dist
+.env
+.env.test
+*.tsbuildinfo
+coverage
+.git
+.gitignore
+CLAUDE.md
+README.md
+tests
+scripts
+.vscode
+*.md
