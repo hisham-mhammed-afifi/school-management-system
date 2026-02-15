@@ -181,7 +181,17 @@ npm run db:seed            # Seed permissions, roles, demo school, admin users
 npm run dev
 ```
 
-Server starts at `http://localhost:3000`. API docs at `http://localhost:3000/api-docs`.
+Server starts at `http://localhost:3000`.
+
+### 7. Explore the API
+
+| URL | Description |
+|-----|-------------|
+| http://localhost:3000/api-docs | Swagger UI (interactive API explorer) |
+| http://localhost:3000/api-docs.json | Raw OpenAPI 3.1 spec (JSON) |
+| http://localhost:3000/health | Health check endpoint |
+
+For authenticated endpoints, click the **Authorize** button in Swagger UI and enter a `Bearer <token>` obtained from the login endpoint.
 
 ### 6. Test credentials
 

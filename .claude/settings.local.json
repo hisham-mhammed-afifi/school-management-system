@@ -28,7 +28,8 @@
       "Bash(echo:*)",
       "Bash(dir:*)",
       "Bash(xargs:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(docker info:*)"
     ]
   }
 }
