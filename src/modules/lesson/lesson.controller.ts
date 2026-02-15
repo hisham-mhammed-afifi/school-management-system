@@ -5,6 +5,7 @@ import {
   bulkCreateLessonsSchema, autoGenerateSchema, clearLessonsQuerySchema,
 } from './lesson.schema.ts';
 import { extractSchoolId } from '../../shared/middleware/auth.middleware.ts';
+import { AppError } from '../../shared/errors/app-error.ts';
 import { z } from 'zod';
 
 const timetableParamsSchema = z.object({
@@ -87,7 +88,10 @@ export class LessonController {
     const { classSectionId } = timetableParamsSchema.parse(req.params);
     const { termId } = timetableQuerySchema.parse(req.query);
     const schoolId = extractSchoolId(req);
-    const result = await this.service.getTimetableByClass(schoolId, termId, classSectionId!);
+    if (!classSectionId) {
+      throw new AppError('Class section ID is required', 400, 'MISSING_CLASS_SECTION');
+    }
+    const result = await this.service.getTimetableByClass(schoolId, termId, classSectionId);
     res.json({ success: true, data: result });
   };
 
@@ -95,7 +99,10 @@ export class LessonController {
     const { teacherId } = timetableParamsSchema.parse(req.params);
     const { termId } = timetableQuerySchema.parse(req.query);
     const schoolId = extractSchoolId(req);
-    const result = await this.service.getTimetableByTeacher(schoolId, termId, teacherId!);
+    if (!teacherId) {
+      throw new AppError('Teacher ID is required', 400, 'MISSING_TEACHER');
+    }
+    const result = await this.service.getTimetableByTeacher(schoolId, termId, teacherId);
     res.json({ success: true, data: result });
   };
 
@@ -103,7 +110,10 @@ export class LessonController {
     const { roomId } = timetableParamsSchema.parse(req.params);
     const { termId } = timetableQuerySchema.parse(req.query);
     const schoolId = extractSchoolId(req);
-    const result = await this.service.getTimetableByRoom(schoolId, termId, roomId!);
+    if (!roomId) {
+      throw new AppError('Room ID is required', 400, 'MISSING_ROOM');
+    }
+    const result = await this.service.getTimetableByRoom(schoolId, termId, roomId);
     res.json({ success: true, data: result });
   };
 }

@@ -128,6 +128,10 @@ model User {
   approvedSubstitutions Substitution[]      @relation("ApprovedByUser")
   approvedDiscounts     FeeDiscount[]       @relation("ApprovedByUser")
 
+  @@index([schoolId])
+  @@index([teacherId])
+  @@index([studentId])
+  @@index([guardianId])
   @@map("users")
 }
 
@@ -143,6 +147,7 @@ model Role {
   announcementTargets AnnouncementTarget[] @relation("TargetRole")
 
   @@unique([schoolId, name])
+  @@index([schoolId])
   @@map("roles")
 }
 
@@ -168,6 +173,8 @@ model RolePermission {
   permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
 
   @@unique([roleId, permissionId])
+  @@index([roleId])
+  @@index([permissionId])
   @@map("role_permissions")
 }
 
@@ -183,6 +190,9 @@ model UserRole {
   school School? @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
   @@unique([userId, roleId, schoolId])
+  @@index([userId])
+  @@index([roleId])
+  @@index([schoolId])
   @@map("user_roles")
 }
 
@@ -214,6 +224,7 @@ model AcademicYear {
   academicEvents           AcademicEvent[]
 
   @@unique([schoolId, name])
+  @@index([schoolId])
   @@map("academic_years")
 }
 
@@ -236,6 +247,8 @@ model Term {
   reportCardSnapshots ReportCardSnapshot[]
 
   @@unique([schoolId, academicYearId, name])
+  @@index([schoolId])
+  @@index([academicYearId])
   @@map("terms")
 }
 
@@ -253,6 +266,8 @@ model Department {
   teachers    Teacher[] @relation("DepartmentTeachers")
 
   @@unique([schoolId, name])
+  @@index([schoolId])
+  @@index([headTeacherId])
   @@map("departments")
 }
 
@@ -274,6 +289,7 @@ model Grade {
 
   @@unique([schoolId, name])
   @@unique([schoolId, levelOrder])
+  @@index([schoolId])
   @@map("grades")
 }
 
@@ -301,6 +317,10 @@ model ClassSection {
   announcementTargets      AnnouncementTarget[]      @relation("TargetClassSection")
 
   @@unique([schoolId, academicYearId, gradeId, name])
+  @@index([schoolId])
+  @@index([academicYearId])
+  @@index([gradeId])
+  @@index([homeroomTeacherId])
   @@map("class_sections")
 }
 
@@ -324,6 +344,7 @@ model Subject {
   roomSubjectSuitability   RoomSubjectSuitability[]
 
   @@unique([schoolId, code])
+  @@index([schoolId])
   @@map("subjects")
 }
 
@@ -339,6 +360,9 @@ model SubjectGrade {
   grade   Grade   @relation(fields: [gradeId], references: [id], onDelete: Cascade)
 
   @@unique([schoolId, subjectId, gradeId])
+  @@index([schoolId])
+  @@index([subjectId])
+  @@index([gradeId])
   @@map("subject_grades")
 }
 
@@ -429,6 +453,7 @@ model Guardian {
   user             User?
   studentGuardians StudentGuardian[]
 
+  @@index([schoolId, deletedAt])
   @@map("guardians")
 }
 
@@ -458,6 +483,9 @@ model StudentGuardian {
   guardian Guardian @relation(fields: [guardianId], references: [id], onDelete: Cascade)
 
   @@unique([schoolId, studentId, guardianId])
+  @@index([schoolId])
+  @@index([studentId])
+  @@index([guardianId])
   @@map("student_guardians")
 }
 
@@ -489,6 +517,9 @@ model StudentEnrollment {
 
   @@unique([schoolId, studentId, academicYearId])
   @@index([schoolId, classSectionId, status])
+  @@index([studentId])
+  @@index([classSectionId])
+  @@index([academicYearId])
   @@map("student_enrollments")
 }
 
@@ -538,6 +569,9 @@ model Teacher {
   teacherAttendance   TeacherAttendance[]
 
   @@unique([schoolId, teacherCode])
+  @@index([schoolId, deletedAt])
+  @@index([schoolId])
+  @@index([departmentId])
   @@map("teachers")
 }
 
@@ -553,6 +587,9 @@ model TeacherSubject {
   subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 
   @@unique([schoolId, teacherId, subjectId])
+  @@index([schoolId])
+  @@index([teacherId])
+  @@index([subjectId])
   @@map("teacher_subjects")
 }
 
@@ -571,6 +608,10 @@ model ClassSubjectRequirement {
   subject      Subject      @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 
   @@unique([schoolId, academicYearId, classSectionId, subjectId])
+  @@index([schoolId])
+  @@index([academicYearId])
+  @@index([classSectionId])
+  @@index([subjectId])
   @@map("class_subject_requirements")
 }
 
@@ -593,6 +634,8 @@ model PeriodSet {
   periods          Period[]
 
   @@unique([schoolId, academicYearId, name])
+  @@index([schoolId])
+  @@index([academicYearId])
   @@map("period_sets")
 }
 
@@ -608,6 +651,9 @@ model SchoolWorkingDay {
   periodSet PeriodSet @relation(fields: [periodSetId], references: [id], onDelete: Cascade)
 
   @@unique([schoolId, periodSetId, dayOfWeek])
+  @@index([schoolId])
+  @@index([periodSetId])
+  @@index([dayOfWeek])
   @@map("school_working_days")
 }
 
@@ -628,6 +674,8 @@ model Period {
   teacherAvailability TeacherAvailability[]
 
   @@unique([schoolId, periodSetId, orderIndex])
+  @@index([schoolId])
+  @@index([periodSetId])
   @@map("periods")
 }
 
@@ -643,6 +691,9 @@ model TimeSlot {
   lessons Lesson[]
 
   @@unique([schoolId, dayOfWeek, periodId])
+  @@index([schoolId])
+  @@index([periodId])
+  @@index([dayOfWeek])
   @@map("time_slots")
 }
 
@@ -676,6 +727,7 @@ model Room {
   lessons                Lesson[]
 
   @@unique([schoolId, name])
+  @@index([schoolId])
   @@map("rooms")
 }
 
@@ -691,6 +743,9 @@ model RoomSubjectSuitability {
   subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 
   @@unique([schoolId, roomId, subjectId])
+  @@index([schoolId])
+  @@index([roomId])
+  @@index([subjectId])
   @@map("room_subject_suitability")
 }
 
@@ -734,6 +789,14 @@ model Lesson {
   // Note: Partial unique indexes for conflict prevention are handled via raw SQL migration
   @@index([schoolId, termId, classSectionId])
   @@index([schoolId, termId, teacherId])
+  @@index([schoolId])
+  @@index([academicYearId])
+  @@index([termId])
+  @@index([classSectionId])
+  @@index([subjectId])
+  @@index([teacherId])
+  @@index([roomId])
+  @@index([timeSlotId])
   @@map("lessons")
 }
 
@@ -757,6 +820,11 @@ model Substitution {
   approvedByUser    User?   @relation("ApprovedByUser", fields: [approvedBy], references: [id], onDelete: SetNull)
 
   @@unique([schoolId, lessonId, date])
+  @@index([schoolId])
+  @@index([lessonId])
+  @@index([originalTeacherId])
+  @@index([substituteTeacherId])
+  @@index([approvedBy])
   @@map("substitutions")
 }
 
@@ -778,6 +846,9 @@ model TeacherAvailability {
   period  Period  @relation(fields: [periodId], references: [id], onDelete: Cascade)
 
   @@unique([schoolId, teacherId, dayOfWeek, periodId])
+  @@index([schoolId])
+  @@index([teacherId])
+  @@index([periodId])
   @@map("teacher_availability")
 }
 
@@ -818,6 +889,9 @@ model TeacherLeave {
   approvedByUser User?   @relation("ApprovedByUser", fields: [approvedBy], references: [id], onDelete: SetNull)
 
   @@index([schoolId, teacherId, status])
+  @@index([schoolId])
+  @@index([teacherId])
+  @@index([approvedBy])
   @@map("teacher_leaves")
 }
 
@@ -854,6 +928,10 @@ model StudentAttendance {
 
   // Note: Partial unique indexes for daily vs per-lesson are handled via raw SQL migration
   @@index([schoolId, classSectionId, date])
+  @@index([schoolId])
+  @@index([studentId])
+  @@index([lessonId])
+  @@index([recordedBy])
   @@map("student_attendance")
 }
 
@@ -880,6 +958,8 @@ model TeacherAttendance {
   teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Restrict)
 
   @@unique([schoolId, teacherId, date])
+  @@index([schoolId])
+  @@index([teacherId])
   @@map("teacher_attendance")
 }
 
@@ -900,6 +980,7 @@ model GradingScale {
   exams  Exam[]
 
   @@unique([schoolId, name])
+  @@index([schoolId])
   @@map("grading_scales")
 }
 
@@ -915,6 +996,7 @@ model GradingScaleLevel {
   // Relations
   gradingScale GradingScale @relation(fields: [gradingScaleId], references: [id], onDelete: Cascade)
 
+  @@index([gradingScaleId])
   @@map("grading_scale_levels")
 }
 
@@ -947,6 +1029,10 @@ model Exam {
   gradingScale GradingScale @relation(fields: [gradingScaleId], references: [id], onDelete: Restrict)
   examSubjects ExamSubject[]
 
+  @@index([schoolId])
+  @@index([academicYearId])
+  @@index([termId])
+  @@index([gradingScaleId])
   @@map("exams")
 }
 
@@ -969,6 +1055,10 @@ model ExamSubject {
   studentGrades StudentGrade[]
 
   @@unique([schoolId, examId, subjectId, gradeId])
+  @@index([schoolId])
+  @@index([examId])
+  @@index([subjectId])
+  @@index([gradeId])
   @@map("exam_subjects")
 }
 
@@ -993,6 +1083,9 @@ model StudentGrade {
 
   @@unique([schoolId, studentId, examSubjectId])
   @@index([schoolId, studentId])
+  @@index([schoolId])
+  @@index([examSubjectId])
+  @@index([gradedBy])
   @@map("student_grades")
 }
 
@@ -1022,6 +1115,12 @@ model ReportCardSnapshot {
   generatedByUser User         @relation("GeneratedByUser", fields: [generatedBy], references: [id], onDelete: Restrict)
 
   @@unique([schoolId, studentId, termId])
+  @@index([schoolId])
+  @@index([studentId])
+  @@index([academicYearId])
+  @@index([termId])
+  @@index([classSectionId])
+  @@index([generatedBy])
   @@map("report_card_snapshots")
 }
 
@@ -1041,6 +1140,7 @@ model FeeCategory {
   feeStructures FeeStructure[]
 
   @@unique([schoolId, name])
+  @@index([schoolId])
   @@map("fee_categories")
 }
 
@@ -1073,6 +1173,10 @@ model FeeStructure {
   feeDiscounts FeeDiscount[]
   feeInvoiceItems FeeInvoiceItem[]
 
+  @@index([schoolId])
+  @@index([academicYearId])
+  @@index([gradeId])
+  @@index([feeCategoryId])
   @@map("fee_structures")
 }
 
@@ -1100,6 +1204,10 @@ model FeeDiscount {
   approvedByUser User?        @relation("ApprovedByUser", fields: [approvedBy], references: [id], onDelete: SetNull)
 
   @@unique([schoolId, studentId, feeStructureId])
+  @@index([schoolId])
+  @@index([studentId])
+  @@index([feeStructureId])
+  @@index([approvedBy])
   @@map("fee_discounts")
 }
 
@@ -1134,6 +1242,8 @@ model FeeInvoice {
 
   @@unique([schoolId, invoiceNumber])
   @@index([schoolId, studentId, status])
+  @@index([schoolId])
+  @@index([studentId])
   @@map("fee_invoices")
 }
 
@@ -1152,6 +1262,9 @@ model FeeInvoiceItem {
   invoice      FeeInvoice   @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   feeStructure FeeStructure @relation(fields: [feeStructureId], references: [id], onDelete: Restrict)
 
+  @@index([schoolId])
+  @@index([invoiceId])
+  @@index([feeStructureId])
   @@map("fee_invoice_items")
 }
 
@@ -1182,6 +1295,9 @@ model FeePayment {
   receivedByUser User       @relation("ReceivedByUser", fields: [receivedBy], references: [id], onDelete: Restrict)
 
   @@index([schoolId, paymentDate])
+  @@index([schoolId])
+  @@index([invoiceId])
+  @@index([receivedBy])
   @@map("fee_payments")
 }
 
@@ -1206,6 +1322,8 @@ model Announcement {
   publishedByUser User                 @relation("PublishedByUser", fields: [publishedBy], references: [id], onDelete: Restrict)
   targets         AnnouncementTarget[]
 
+  @@index([schoolId])
+  @@index([publishedBy])
   @@map("announcements")
 }
 
@@ -1230,6 +1348,10 @@ model AnnouncementTarget {
   targetGrade        Grade?        @relation("TargetGrade", fields: [targetGradeId], references: [id], onDelete: Cascade)
   targetClassSection ClassSection? @relation("TargetClassSection", fields: [targetClassSectionId], references: [id], onDelete: Cascade)
 
+  @@index([announcementId])
+  @@index([targetRoleId])
+  @@index([targetGradeId])
+  @@index([targetClassSectionId])
   @@map("announcement_targets")
 }
 
@@ -1257,6 +1379,8 @@ model Notification {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, isRead])
+  @@index([schoolId])
+  @@index([userId])
   @@map("notifications")
 }
 
@@ -1290,6 +1414,8 @@ model AcademicEvent {
   school       School       @relation(fields: [schoolId], references: [id], onDelete: Restrict)
   academicYear AcademicYear @relation(fields: [academicYearId], references: [id], onDelete: Restrict)
 
+  @@index([schoolId])
+  @@index([academicYearId])
   @@map("academic_events")
 }
 
@@ -1321,5 +1447,7 @@ model AuditLog {
 
   @@index([schoolId, tableName, recordId])
   @@index([schoolId, createdAt])
+  @@index([schoolId])
+  @@index([userId])
   @@map("audit_logs")
 }

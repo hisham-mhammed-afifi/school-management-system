@@ -53,12 +53,16 @@ export class StudentAttendanceService {
     }
 
     const summary = Array.from(byStudent.entries()).map(([studentId, counts]) => {
-      const total = counts['present']! + counts['absent']! + counts['late']! + counts['excused']!;
+      const present = counts['present'] ?? 0;
+      const absent = counts['absent'] ?? 0;
+      const late = counts['late'] ?? 0;
+      const excused = counts['excused'] ?? 0;
+      const total = present + absent + late + excused;
       return {
         studentId,
         ...counts,
         total,
-        attendanceRate: total > 0 ? Math.round(((counts['present']! + counts['late']!) / total) * 10000) / 100 : 0,
+        attendanceRate: total > 0 ? Math.round(((present + late) / total) * 10000) / 100 : 0,
       };
     });
 

@@ -86,7 +86,8 @@ export class LessonService {
     const errors: Array<{ index: number; code: string; message: string }> = [];
 
     for (let i = 0; i < lessons.length; i++) {
-      const input = lessons[i]!;
+      const input = lessons[i];
+      if (!input) continue;
       try {
         await this.validateConflicts(schoolId, input.teacherId, input.classSectionId, input.roomId, input.timeSlotId, input.termId, input.subjectId);
 

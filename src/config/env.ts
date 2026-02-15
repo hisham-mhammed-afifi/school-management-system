@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { z } from 'zod';
 
 const envSchema = z.object({
@@ -14,4 +13,6 @@ const envSchema = z.object({
 
 export type Env = z.infer<typeof envSchema>;
 
+// Environment variables are now loaded via Node.js 24's native --env-file flag
+// passed in package.json scripts (e.g., "dev": "node --env-file=.env --watch src/index.ts")
 export const env: Env = envSchema.parse(process.env);

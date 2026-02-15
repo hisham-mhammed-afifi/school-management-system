@@ -34,7 +34,12 @@
       "Bash(npx prisma migrate dev:*)",
       "Bash(docker exec:*)",
       "Bash(npm run db:seed:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(npm uninstall:*)",
+      "Bash(npm run typecheck:*)",
+      "Bash(npm run db:generate:*)",
+      "Bash(node:*)",
+      "Bash(npm test:*)"
     ]
   }
 }

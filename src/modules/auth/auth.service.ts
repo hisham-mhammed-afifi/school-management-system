@@ -269,9 +269,9 @@ export class AuthService {
 
 function parseExpiry(expiry: string): number {
   const match = expiry.match(/^(\d+)([smhd])$/);
-  if (!match) return 3600;
-  const value = parseInt(match[1]!, 10);
-  const unit = match[2]!;
+  if (!match || !match[1] || !match[2]) return 3600;
+  const value = parseInt(match[1], 10);
+  const unit = match[2];
   const multipliers: Record<string, number> = { s: 1, m: 60, h: 3600, d: 86400 };
   return value * (multipliers[unit] ?? 3600);
 }

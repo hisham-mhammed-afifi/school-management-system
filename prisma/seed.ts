@@ -1,9 +1,9 @@
-import 'dotenv/config';
 import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../src/generated/prisma/client.ts';
 import { hashPassword } from '../src/shared/utils/password.ts';
 
+// Environment variables are loaded via --env-file flag in package.json script
 const DATABASE_URL = process.env['DATABASE_URL'];
 if (!DATABASE_URL) {
   console.error('DATABASE_URL is required');

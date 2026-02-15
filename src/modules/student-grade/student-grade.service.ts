@@ -112,7 +112,8 @@ export class StudentGradeService {
         });
       }
 
-      const student = studentMap.get(g.studentId)!;
+      const student = studentMap.get(g.studentId);
+      if (!student) continue;
       const subjectId = g.examSubject.subjectId;
 
       if (!student.subjects.has(subjectId)) {
