@@ -33,7 +33,8 @@
       "Bash(npm run db:migrate:dev:*)",
       "Bash(npx prisma migrate dev:*)",
       "Bash(docker exec:*)",
-      "Bash(npm run db:seed:*)"
+      "Bash(npm run db:seed:*)",
+      "WebSearch"
     ]
   }
 }
