@@ -29,7 +29,11 @@
       "Bash(dir:*)",
       "Bash(xargs:*)",
       "Bash(done)",
-      "Bash(docker info:*)"
+      "Bash(docker info:*)",
+      "Bash(npm run db:migrate:dev:*)",
+      "Bash(npx prisma migrate dev:*)",
+      "Bash(docker exec:*)",
+      "Bash(npm run db:seed:*)"
     ]
   }
 }
