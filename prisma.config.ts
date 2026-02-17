@@ -1,6 +1,8 @@
+import dotenv from 'dotenv';
 import { defineConfig } from 'prisma/config';
 
-// Prisma CLI natively reads .env files, no need for dotenv
+dotenv.config();
+
 export default defineConfig({
   schema: 'prisma/schema.prisma',
   migrations: {
