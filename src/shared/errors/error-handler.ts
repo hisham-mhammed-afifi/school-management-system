@@ -35,6 +35,15 @@ export function errorHandler(
     return;
   }
 
+  // Body-parser errors (malformed JSON, etc.)
+  if (err instanceof SyntaxError && 'status' in err && (err as Record<string, unknown>)['status'] === 400) {
+    res.status(400).json({
+      success: false,
+      error: { code: 'BAD_REQUEST', message: 'Malformed JSON in request body' },
+    });
+    return;
+  }
+
   // Prisma known errors
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
     switch (err.code) {
