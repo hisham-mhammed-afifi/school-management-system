@@ -81,7 +81,7 @@ export function createFeePaymentRoutes(controller: FeePaymentController): Router
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('fees.view'), controller.list);
+  router.get('/', requirePermission('fee-payments.list'), controller.list);
 
   /**
    * @openapi
@@ -116,7 +116,7 @@ export function createFeePaymentRoutes(controller: FeePaymentController): Router
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('fees.view'), controller.getById);
+  router.get('/:id', requirePermission('fee-payments.read'), controller.getById);
 
   /**
    * @openapi
@@ -182,7 +182,7 @@ export function createFeePaymentRoutes(controller: FeePaymentController): Router
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/', requirePermission('fees.collect'), controller.create);
+  router.post('/', requirePermission('fee-payments.create'), controller.create);
 
   return router;
 }

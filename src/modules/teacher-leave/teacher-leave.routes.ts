@@ -63,7 +63,7 @@ export function createTeacherLeaveRoutes(controller: TeacherLeaveController): Ro
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('leaves.view'), controller.list);
+  router.get('/', requirePermission('teacher-leaves.list'), controller.list);
 
   /**
    * @openapi
@@ -98,7 +98,7 @@ export function createTeacherLeaveRoutes(controller: TeacherLeaveController): Ro
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('leaves.view'), controller.getById);
+  router.get('/:id', requirePermission('teacher-leaves.read'), controller.getById);
 
   /**
    * @openapi
@@ -159,7 +159,7 @@ export function createTeacherLeaveRoutes(controller: TeacherLeaveController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/', requirePermission('leaves.request'), controller.create);
+  router.post('/', requirePermission('teacher-leaves.create'), controller.create);
 
   /**
    * @openapi
@@ -198,7 +198,7 @@ export function createTeacherLeaveRoutes(controller: TeacherLeaveController): Ro
    *       409:
    *         description: Leave request is not in pending status
    */
-  router.post('/:id/approve', requirePermission('leaves.approve'), controller.approve);
+  router.post('/:id/approve', requirePermission('teacher-leaves.approve'), controller.approve);
 
   /**
    * @openapi
@@ -246,7 +246,7 @@ export function createTeacherLeaveRoutes(controller: TeacherLeaveController): Ro
    *       409:
    *         description: Leave request is not in pending status
    */
-  router.post('/:id/reject', requirePermission('leaves.approve'), controller.reject);
+  router.post('/:id/reject', requirePermission('teacher-leaves.approve'), controller.reject);
 
   /**
    * @openapi
@@ -285,7 +285,7 @@ export function createTeacherLeaveRoutes(controller: TeacherLeaveController): Ro
    *       409:
    *         description: Cannot cancel leave that has already started or is rejected
    */
-  router.post('/:id/cancel', requirePermission('leaves.request'), controller.cancel);
+  router.post('/:id/cancel', requirePermission('teacher-leaves.create'), controller.cancel);
 
   return router;
 }

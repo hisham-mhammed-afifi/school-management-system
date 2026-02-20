@@ -63,7 +63,7 @@ export function createEnrollmentRoutes(controller: EnrollmentController): Router
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('enrollments.view'), controller.list);
+  router.get('/', requirePermission('enrollments.list'), controller.list);
 
   /**
    * @openapi
@@ -98,7 +98,7 @@ export function createEnrollmentRoutes(controller: EnrollmentController): Router
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('enrollments.view'), controller.getById);
+  router.get('/:id', requirePermission('enrollments.read'), controller.getById);
 
   /**
    * @openapi

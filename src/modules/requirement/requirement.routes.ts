@@ -8,8 +8,8 @@ export function createRequirementRoutes(controller: RequirementController): Rout
 
   router.use(authenticate);
 
-  router.get('/', requirePermission('requirements.view'), controller.get);
-  router.put('/', requirePermission('requirements.manage'), controller.set);
+  router.get('/', requirePermission('requirements.list'), controller.get);
+  router.put('/', requirePermission('requirements.update'), controller.set);
 
   return router;
 }

@@ -56,7 +56,7 @@ export function createAnnouncementRoutes(controller: AnnouncementController): Ro
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('announcements.view'), controller.list);
+  router.get('/', requirePermission('announcements.list'), controller.list);
 
   /**
    * @openapi
@@ -91,7 +91,7 @@ export function createAnnouncementRoutes(controller: AnnouncementController): Ro
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('announcements.view'), controller.getById);
+  router.get('/:id', requirePermission('announcements.read'), controller.getById);
 
   /**
    * @openapi

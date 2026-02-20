@@ -43,7 +43,7 @@ export function createTermNestedRoutes(controller: TermController): Router {
    *       404:
    *         description: Academic year not found
    */
-  router.get('/', requirePermission('terms.view'), controller.listByYear);
+  router.get('/', requirePermission('terms.list'), controller.listByYear);
 
   /**
    * @openapi

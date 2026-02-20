@@ -57,7 +57,7 @@ export function createStudentGradeRoutes(controller: StudentGradeController): Ro
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('grades_entry.view'), controller.list);
+  router.get('/', requirePermission('student-grades.list'), controller.list);
 
   /**
    * @openapi
@@ -111,7 +111,7 @@ export function createStudentGradeRoutes(controller: StudentGradeController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.get('/report', requirePermission('grades_entry.view'), controller.report);
+  router.get('/report', requirePermission('student-grades.list'), controller.report);
 
   /**
    * @openapi
@@ -183,7 +183,7 @@ export function createStudentGradeRoutes(controller: StudentGradeController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/bulk', requirePermission('grades_entry.record'), controller.bulkRecord);
+  router.post('/bulk', requirePermission('student-grades.create'), controller.bulkRecord);
 
   /**
    * @openapi
@@ -231,7 +231,7 @@ export function createStudentGradeRoutes(controller: StudentGradeController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.patch('/:id', requirePermission('grades_entry.update'), controller.correct);
+  router.patch('/:id', requirePermission('student-grades.update'), controller.correct);
 
   return router;
 }

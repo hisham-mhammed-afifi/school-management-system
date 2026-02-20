@@ -57,7 +57,7 @@ export function createReportCardRoutes(controller: ReportCardController): Router
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('grades_entry.view'), controller.list);
+  router.get('/', requirePermission('report-cards.list'), controller.list);
 
   /**
    * @openapi
@@ -94,7 +94,7 @@ export function createReportCardRoutes(controller: ReportCardController): Router
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('grades_entry.view'), controller.getById);
+  router.get('/:id', requirePermission('report-cards.read'), controller.getById);
 
   /**
    * @openapi
@@ -160,7 +160,7 @@ export function createReportCardRoutes(controller: ReportCardController): Router
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/generate', requirePermission('grades_entry.publish'), controller.generate);
+  router.post('/generate', requirePermission('report-cards.create'), controller.generate);
 
   /**
    * @openapi
@@ -210,7 +210,7 @@ export function createReportCardRoutes(controller: ReportCardController): Router
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.patch('/:id/remarks', requirePermission('grades_entry.update'), controller.updateRemarks);
+  router.patch('/:id/remarks', requirePermission('report-cards.update'), controller.updateRemarks);
 
   return router;
 }

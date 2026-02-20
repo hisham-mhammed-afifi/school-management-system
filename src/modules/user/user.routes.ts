@@ -59,7 +59,7 @@ export function createUserRoutes(controller: UserController): Router {
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.get('/', requirePermission('users.view'), controller.list);
+  router.get('/', requirePermission('users.list'), controller.list);
 
   /**
    * @openapi
@@ -89,7 +89,7 @@ export function createUserRoutes(controller: UserController): Router {
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.get('/:id', requirePermission('users.view'), controller.getById);
+  router.get('/:id', requirePermission('users.read'), controller.getById);
 
   /**
    * @openapi
@@ -235,7 +235,7 @@ export function createUserRoutes(controller: UserController): Router {
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/:id/roles', requirePermission('users.manage_roles'), controller.assignRole);
+  router.post('/:id/roles', requirePermission('users.manage-roles'), controller.assignRole);
 
   /**
    * @openapi
@@ -273,7 +273,7 @@ export function createUserRoutes(controller: UserController): Router {
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.delete('/:id/roles/:roleId', requirePermission('users.manage_roles'), controller.removeRole);
+  router.delete('/:id/roles/:roleId', requirePermission('users.manage-roles'), controller.removeRole);
 
   return router;
 }

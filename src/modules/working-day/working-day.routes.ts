@@ -44,7 +44,7 @@ export function createWorkingDayRoutes(controller: WorkingDayController): Router
    *       404:
    *         description: Period set not found
    */
-  router.get('/', requirePermission('scheduling.view'), controller.list);
+  router.get('/', requirePermission('working-days.list'), controller.list);
 
   /**
    * @openapi
@@ -108,7 +108,7 @@ export function createWorkingDayRoutes(controller: WorkingDayController): Router
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.put('/', requirePermission('scheduling.manage'), controller.replace);
+  router.put('/', requirePermission('working-days.update'), controller.replace);
 
   return router;
 }

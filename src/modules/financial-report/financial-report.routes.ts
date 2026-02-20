@@ -53,7 +53,7 @@ export function createFinancialReportRoutes(controller: FinancialReportControlle
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.get('/outstanding', requirePermission('fees.report'), controller.outstanding);
+  router.get('/outstanding', requirePermission('financial-reports.read'), controller.outstanding);
 
   /**
    * @openapi
@@ -103,7 +103,7 @@ export function createFinancialReportRoutes(controller: FinancialReportControlle
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.get('/collection', requirePermission('fees.report'), controller.collection);
+  router.get('/collection', requirePermission('financial-reports.read'), controller.collection);
 
   /**
    * @openapi
@@ -160,7 +160,7 @@ export function createFinancialReportRoutes(controller: FinancialReportControlle
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.get('/student-balance', requirePermission('fees.report'), controller.studentBalance);
+  router.get('/student-balance', requirePermission('financial-reports.read'), controller.studentBalance);
 
   /**
    * @openapi
@@ -217,7 +217,7 @@ export function createFinancialReportRoutes(controller: FinancialReportControlle
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.get('/category-breakdown', requirePermission('fees.report'), controller.categoryBreakdown);
+  router.get('/category-breakdown', requirePermission('financial-reports.read'), controller.categoryBreakdown);
 
   return router;
 }

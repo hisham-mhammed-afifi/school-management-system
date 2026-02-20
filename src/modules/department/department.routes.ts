@@ -37,7 +37,7 @@ export function createDepartmentRoutes(controller: DepartmentController): Router
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('departments.view'), controller.list);
+  router.get('/', requirePermission('departments.list'), controller.list);
 
   /**
    * @openapi
@@ -72,7 +72,7 @@ export function createDepartmentRoutes(controller: DepartmentController): Router
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('departments.view'), controller.getById);
+  router.get('/:id', requirePermission('departments.read'), controller.getById);
 
   /**
    * @openapi
@@ -199,7 +199,7 @@ export function createDepartmentRoutes(controller: DepartmentController): Router
    *       409:
    *         description: Cannot delete department with associated data
    */
-  router.delete('/:id', requirePermission('departments.update'), controller.remove);
+  router.delete('/:id', requirePermission('departments.delete'), controller.remove);
 
   return router;
 }

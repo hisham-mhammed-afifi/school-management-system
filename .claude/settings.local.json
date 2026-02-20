@@ -45,7 +45,10 @@
       "Bash(curl:*)",
       "Bash(python:*)",
       "Bash(find:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(/tmp/compare_perms.sh:*)",
+      "Bash(chmod:*)",
+      "Bash(bash /tmp/compare_perms.sh)"
     ]
   }
 }

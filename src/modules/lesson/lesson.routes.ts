@@ -62,7 +62,7 @@ export function createLessonRoutes(controller: LessonController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('lessons.view'), controller.list);
+  router.get('/', requirePermission('lessons.list'), controller.list);
 
   /**
    * @openapi
@@ -97,7 +97,7 @@ export function createLessonRoutes(controller: LessonController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('lessons.view'), controller.getById);
+  router.get('/:id', requirePermission('lessons.read'), controller.getById);
 
   /**
    * @openapi
@@ -385,7 +385,7 @@ export function createTimetableRoutes(controller: LessonController): Router {
    *       404:
    *         description: Class section not found
    */
-  router.get('/class/:classSectionId', requirePermission('lessons.view'), controller.timetableByClass);
+  router.get('/class/:classSectionId', requirePermission('lessons.list'), controller.timetableByClass);
 
   /**
    * @openapi
@@ -427,7 +427,7 @@ export function createTimetableRoutes(controller: LessonController): Router {
    *       404:
    *         description: Teacher not found
    */
-  router.get('/teacher/:teacherId', requirePermission('lessons.view'), controller.timetableByTeacher);
+  router.get('/teacher/:teacherId', requirePermission('lessons.list'), controller.timetableByTeacher);
 
   /**
    * @openapi
@@ -469,7 +469,7 @@ export function createTimetableRoutes(controller: LessonController): Router {
    *       404:
    *         description: Room not found
    */
-  router.get('/room/:roomId', requirePermission('lessons.view'), controller.timetableByRoom);
+  router.get('/room/:roomId', requirePermission('lessons.list'), controller.timetableByRoom);
 
   return router;
 }

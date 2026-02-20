@@ -44,7 +44,7 @@ export function createTeacherAvailabilityRoutes(controller: TeacherAvailabilityC
    *       404:
    *         description: Teacher not found
    */
-  router.get('/', requirePermission('availability.view'), controller.get);
+  router.get('/', requirePermission('teacher-availability.list'), controller.get);
 
   /**
    * @openapi
@@ -117,7 +117,7 @@ export function createTeacherAvailabilityRoutes(controller: TeacherAvailabilityC
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.put('/', requirePermission('availability.manage'), controller.replace);
+  router.put('/', requirePermission('teacher-availability.update'), controller.replace);
 
   return router;
 }

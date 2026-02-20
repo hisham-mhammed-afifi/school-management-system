@@ -64,7 +64,7 @@ export function createTeacherRoutes(controller: TeacherController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('teachers.view'), controller.list);
+  router.get('/', requirePermission('teachers.list'), controller.list);
 
   /**
    * @openapi
@@ -99,7 +99,7 @@ export function createTeacherRoutes(controller: TeacherController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('teachers.view'), controller.getById);
+  router.get('/:id', requirePermission('teachers.read'), controller.getById);
 
   /**
    * @openapi
@@ -271,7 +271,7 @@ export function createTeacherRoutes(controller: TeacherController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id/subjects', requirePermission('teachers.view'), controller.getSubjects);
+  router.get('/:id/subjects', requirePermission('teachers.read'), controller.getSubjects);
 
   /**
    * @openapi

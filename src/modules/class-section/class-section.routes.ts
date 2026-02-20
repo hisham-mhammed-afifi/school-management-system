@@ -45,7 +45,7 @@ export function createClassSectionRoutes(controller: ClassSectionController): Ro
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('class_sections.view'), controller.list);
+  router.get('/', requirePermission('class-sections.list'), controller.list);
 
   /**
    * @openapi
@@ -80,7 +80,7 @@ export function createClassSectionRoutes(controller: ClassSectionController): Ro
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('class_sections.view'), controller.getById);
+  router.get('/:id', requirePermission('class-sections.read'), controller.getById);
 
   /**
    * @openapi
@@ -135,7 +135,7 @@ export function createClassSectionRoutes(controller: ClassSectionController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/', requirePermission('class_sections.create'), controller.create);
+  router.post('/', requirePermission('class-sections.create'), controller.create);
 
   /**
    * @openapi
@@ -182,7 +182,7 @@ export function createClassSectionRoutes(controller: ClassSectionController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.patch('/:id', requirePermission('class_sections.update'), controller.update);
+  router.patch('/:id', requirePermission('class-sections.update'), controller.update);
 
   /**
    * @openapi
@@ -211,7 +211,7 @@ export function createClassSectionRoutes(controller: ClassSectionController): Ro
    *       409:
    *         description: Cannot delete section with associated data
    */
-  router.delete('/:id', requirePermission('class_sections.delete'), controller.remove);
+  router.delete('/:id', requirePermission('class-sections.delete'), controller.remove);
 
   return router;
 }

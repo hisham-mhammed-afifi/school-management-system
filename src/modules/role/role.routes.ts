@@ -40,7 +40,7 @@ export function createRoleRoutes(controller: RoleController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('roles.view'), controller.list);
+  router.get('/', requirePermission('roles.list'), controller.list);
 
   /**
    * @openapi
@@ -75,7 +75,7 @@ export function createRoleRoutes(controller: RoleController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('roles.view'), controller.getById);
+  router.get('/:id', requirePermission('roles.read'), controller.getById);
 
   /**
    * @openapi
@@ -258,7 +258,7 @@ export function createRoleRoutes(controller: RoleController): Router {
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.put('/:id/permissions', requirePermission('roles.manage_permissions'), controller.setPermissions);
+  router.put('/:id/permissions', requirePermission('roles.manage-permissions'), controller.setPermissions);
 
   return router;
 }

@@ -39,7 +39,7 @@ export function createPeriodSetRoutes(controller: PeriodSetController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('scheduling.view'), controller.list);
+  router.get('/', requirePermission('period-sets.list'), controller.list);
 
   /**
    * @openapi
@@ -74,7 +74,7 @@ export function createPeriodSetRoutes(controller: PeriodSetController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('scheduling.view'), controller.getById);
+  router.get('/:id', requirePermission('period-sets.read'), controller.getById);
 
   /**
    * @openapi
@@ -120,7 +120,7 @@ export function createPeriodSetRoutes(controller: PeriodSetController): Router {
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/', requirePermission('scheduling.manage'), controller.create);
+  router.post('/', requirePermission('period-sets.create'), controller.create);
 
   /**
    * @openapi
@@ -167,7 +167,7 @@ export function createPeriodSetRoutes(controller: PeriodSetController): Router {
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.patch('/:id', requirePermission('scheduling.manage'), controller.update);
+  router.patch('/:id', requirePermission('period-sets.update'), controller.update);
 
   /**
    * @openapi
@@ -196,7 +196,7 @@ export function createPeriodSetRoutes(controller: PeriodSetController): Router {
    *       409:
    *         description: Cannot delete period set with associated working days or lessons
    */
-  router.delete('/:id', requirePermission('scheduling.manage'), controller.remove);
+  router.delete('/:id', requirePermission('period-sets.delete'), controller.remove);
 
   return router;
 }

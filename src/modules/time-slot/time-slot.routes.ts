@@ -44,7 +44,7 @@ export function createTimeSlotRoutes(controller: TimeSlotController): Router {
    *       404:
    *         description: Period not found
    */
-  router.get('/', requirePermission('scheduling.view'), controller.list);
+  router.get('/', requirePermission('time-slots.list'), controller.list);
 
   /**
    * @openapi
@@ -102,7 +102,7 @@ export function createTimeSlotRoutes(controller: TimeSlotController): Router {
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/generate', requirePermission('scheduling.manage'), controller.generate);
+  router.post('/generate', requirePermission('time-slots.create'), controller.generate);
 
   return router;
 }

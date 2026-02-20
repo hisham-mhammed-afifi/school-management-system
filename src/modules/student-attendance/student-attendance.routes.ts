@@ -73,7 +73,7 @@ export function createStudentAttendanceRoutes(controller: StudentAttendanceContr
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('attendance.view'), controller.list);
+  router.get('/', requirePermission('student-attendance.list'), controller.list);
 
   /**
    * @openapi
@@ -132,7 +132,7 @@ export function createStudentAttendanceRoutes(controller: StudentAttendanceContr
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/summary', requirePermission('attendance.view'), controller.summary);
+  router.get('/summary', requirePermission('student-attendance.list'), controller.summary);
 
   /**
    * @openapi
@@ -167,7 +167,7 @@ export function createStudentAttendanceRoutes(controller: StudentAttendanceContr
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('attendance.view'), controller.getById);
+  router.get('/:id', requirePermission('student-attendance.read'), controller.getById);
 
   /**
    * @openapi
@@ -226,7 +226,7 @@ export function createStudentAttendanceRoutes(controller: StudentAttendanceContr
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/bulk', requirePermission('attendance.record'), controller.bulkRecord);
+  router.post('/bulk', requirePermission('student-attendance.create'), controller.bulkRecord);
 
   /**
    * @openapi
@@ -272,7 +272,7 @@ export function createStudentAttendanceRoutes(controller: StudentAttendanceContr
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.patch('/:id', requirePermission('attendance.correct'), controller.correct);
+  router.patch('/:id', requirePermission('student-attendance.update'), controller.correct);
 
   return router;
 }

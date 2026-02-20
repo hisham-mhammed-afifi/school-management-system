@@ -69,7 +69,7 @@ export function createStudentRoutes(controller: StudentController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('students.view'), controller.list);
+  router.get('/', requirePermission('students.list'), controller.list);
 
   /**
    * @openapi
@@ -103,7 +103,7 @@ export function createStudentRoutes(controller: StudentController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('students.view'), controller.getById);
+  router.get('/:id', requirePermission('students.read'), controller.getById);
 
   /**
    * @openapi

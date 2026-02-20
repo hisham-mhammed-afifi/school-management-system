@@ -7,10 +7,10 @@ export function createStudentGuardianRoutes(controller: StudentGuardianControlle
 
   router.use(authenticate);
 
-  router.get('/', requirePermission('students.view'), controller.list);
-  router.post('/', requirePermission('students.update'), controller.create);
-  router.patch('/:id', requirePermission('students.update'), controller.update);
-  router.delete('/:id', requirePermission('students.update'), controller.remove);
+  router.get('/', requirePermission('student-guardians.list'), controller.list);
+  router.post('/', requirePermission('student-guardians.create'), controller.create);
+  router.patch('/:id', requirePermission('student-guardians.update'), controller.update);
+  router.delete('/:id', requirePermission('student-guardians.delete'), controller.remove);
 
   return router;
 }

@@ -7,10 +7,10 @@ export function createTeacherAttendanceRoutes(controller: TeacherAttendanceContr
 
   router.use(authenticate);
 
-  router.get('/', requirePermission('attendance.view'), controller.list);
-  router.get('/:id', requirePermission('attendance.view'), controller.getById);
-  router.post('/', requirePermission('attendance.record'), controller.record);
-  router.patch('/:id', requirePermission('attendance.correct'), controller.correct);
+  router.get('/', requirePermission('teacher-attendance.list'), controller.list);
+  router.get('/:id', requirePermission('teacher-attendance.read'), controller.getById);
+  router.post('/', requirePermission('teacher-attendance.create'), controller.record);
+  router.patch('/:id', requirePermission('teacher-attendance.update'), controller.correct);
 
   return router;
 }

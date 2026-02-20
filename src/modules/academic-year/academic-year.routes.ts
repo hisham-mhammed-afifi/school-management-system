@@ -43,7 +43,7 @@ export function createAcademicYearRoutes(controller: AcademicYearController): Ro
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('academic_years.view'), controller.list);
+  router.get('/', requirePermission('academic-years.list'), controller.list);
 
   /**
    * @openapi
@@ -78,7 +78,7 @@ export function createAcademicYearRoutes(controller: AcademicYearController): Ro
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('academic_years.view'), controller.getById);
+  router.get('/:id', requirePermission('academic-years.read'), controller.getById);
 
   /**
    * @openapi
@@ -127,7 +127,7 @@ export function createAcademicYearRoutes(controller: AcademicYearController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/', requirePermission('academic_years.create'), controller.create);
+  router.post('/', requirePermission('academic-years.create'), controller.create);
 
   /**
    * @openapi
@@ -175,7 +175,7 @@ export function createAcademicYearRoutes(controller: AcademicYearController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.patch('/:id', requirePermission('academic_years.update'), controller.update);
+  router.patch('/:id', requirePermission('academic-years.update'), controller.update);
 
   /**
    * @openapi
@@ -212,7 +212,7 @@ export function createAcademicYearRoutes(controller: AcademicYearController): Ro
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.post('/:id/activate', requirePermission('academic_years.activate'), controller.activate);
+  router.post('/:id/activate', requirePermission('academic-years.activate'), controller.activate);
 
   /**
    * @openapi
@@ -242,7 +242,7 @@ export function createAcademicYearRoutes(controller: AcademicYearController): Ro
    *       409:
    *         description: Cannot delete active academic year or year with associated data
    */
-  router.delete('/:id', requirePermission('academic_years.delete'), controller.remove);
+  router.delete('/:id', requirePermission('academic-years.delete'), controller.remove);
 
   return router;
 }

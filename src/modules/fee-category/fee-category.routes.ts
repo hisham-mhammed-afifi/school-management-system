@@ -44,7 +44,7 @@ export function createFeeCategoryRoutes(controller: FeeCategoryController): Rout
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('fees.view'), controller.list);
+  router.get('/', requirePermission('fee-categories.list'), controller.list);
 
   /**
    * @openapi
@@ -94,7 +94,7 @@ export function createFeeCategoryRoutes(controller: FeeCategoryController): Rout
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/', requirePermission('fees.manage'), controller.create);
+  router.post('/', requirePermission('fee-categories.create'), controller.create);
 
   /**
    * @openapi
@@ -142,7 +142,7 @@ export function createFeeCategoryRoutes(controller: FeeCategoryController): Rout
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.patch('/:id', requirePermission('fees.manage'), controller.update);
+  router.patch('/:id', requirePermission('fee-categories.update'), controller.update);
 
   /**
    * @openapi
@@ -171,7 +171,7 @@ export function createFeeCategoryRoutes(controller: FeeCategoryController): Rout
    *       409:
    *         description: Cannot delete category with associated data
    */
-  router.delete('/:id', requirePermission('fees.manage'), controller.remove);
+  router.delete('/:id', requirePermission('fee-categories.delete'), controller.remove);
 
   return router;
 }

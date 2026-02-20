@@ -63,7 +63,7 @@ export function createFeeInvoiceRoutes(controller: FeeInvoiceController): Router
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('fees.view'), controller.list);
+  router.get('/', requirePermission('fee-invoices.list'), controller.list);
 
   /**
    * @openapi
@@ -98,7 +98,7 @@ export function createFeeInvoiceRoutes(controller: FeeInvoiceController): Router
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('fees.view'), controller.getById);
+  router.get('/:id', requirePermission('fee-invoices.read'), controller.getById);
 
   /**
    * @openapi
@@ -154,7 +154,7 @@ export function createFeeInvoiceRoutes(controller: FeeInvoiceController): Router
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/', requirePermission('fees.create_invoice'), controller.create);
+  router.post('/', requirePermission('fee-invoices.create'), controller.create);
 
   /**
    * @openapi
@@ -215,7 +215,7 @@ export function createFeeInvoiceRoutes(controller: FeeInvoiceController): Router
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/bulk-generate', requirePermission('fees.create_invoice'), controller.bulkGenerate);
+  router.post('/bulk-generate', requirePermission('fee-invoices.create'), controller.bulkGenerate);
 
   /**
    * @openapi
@@ -264,7 +264,7 @@ export function createFeeInvoiceRoutes(controller: FeeInvoiceController): Router
    *       409:
    *         description: Invoice is not in draft status
    */
-  router.post('/:id/issue', requirePermission('fees.issue_invoice'), controller.issue);
+  router.post('/:id/issue', requirePermission('fee-invoices.update'), controller.issue);
 
   /**
    * @openapi
@@ -313,7 +313,7 @@ export function createFeeInvoiceRoutes(controller: FeeInvoiceController): Router
    *       409:
    *         description: Invoice is already fully paid or cancelled
    */
-  router.post('/:id/cancel', requirePermission('fees.cancel_invoice'), controller.cancel);
+  router.post('/:id/cancel', requirePermission('fee-invoices.update'), controller.cancel);
 
   return router;
 }

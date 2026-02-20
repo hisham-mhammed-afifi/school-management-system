@@ -48,7 +48,7 @@ export function createRoomRoutes(controller: RoomController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('rooms.view'), controller.list);
+  router.get('/', requirePermission('rooms.list'), controller.list);
 
   /**
    * @openapi
@@ -83,7 +83,7 @@ export function createRoomRoutes(controller: RoomController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('rooms.view'), controller.getById);
+  router.get('/:id', requirePermission('rooms.read'), controller.getById);
 
   /**
    * @openapi
@@ -257,7 +257,7 @@ export function createRoomRoutes(controller: RoomController): Router {
    *       404:
    *         description: Room not found
    */
-  router.get('/:roomId/subjects', requirePermission('rooms.view'), controller.getSubjects);
+  router.get('/:roomId/subjects', requirePermission('rooms.read'), controller.getSubjects);
 
   /**
    * @openapi
@@ -321,7 +321,7 @@ export function createRoomRoutes(controller: RoomController): Router {
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.put('/:roomId/subjects', requirePermission('rooms.manage'), controller.assignSubjects);
+  router.put('/:roomId/subjects', requirePermission('rooms.update'), controller.assignSubjects);
 
   return router;
 }

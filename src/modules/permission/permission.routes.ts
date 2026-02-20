@@ -34,7 +34,7 @@ export function createPermissionRoutes(db: PrismaClient): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('roles.view'), async (_req, res) => {
+  router.get('/', requirePermission('roles.list'), async (_req, res) => {
     const permissions = await db.permission.findMany({
       orderBy: [{ module: 'asc' }, { action: 'asc' }],
       select: { id: true, name: true, module: true, action: true },

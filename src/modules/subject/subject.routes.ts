@@ -49,7 +49,7 @@ export function createSubjectRoutes(controller: SubjectController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('subjects.view'), controller.list);
+  router.get('/', requirePermission('subjects.list'), controller.list);
 
   /**
    * @openapi
@@ -84,7 +84,7 @@ export function createSubjectRoutes(controller: SubjectController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('subjects.view'), controller.getById);
+  router.get('/:id', requirePermission('subjects.read'), controller.getById);
 
   /**
    * @openapi
@@ -270,7 +270,7 @@ export function createSubjectRoutes(controller: SubjectController): Router {
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.put('/:subjectId/grades', requirePermission('subjects.manage'), controller.setGrades);
+  router.put('/:subjectId/grades', requirePermission('subjects.update'), controller.setGrades);
 
   return router;
 }
@@ -316,7 +316,7 @@ export function createGradeSubjectsRoutes(controller: SubjectController): Router
    *       404:
    *         description: Grade not found
    */
-  router.get('/', requirePermission('subjects.view'), controller.getByGrade);
+  router.get('/', requirePermission('subjects.list'), controller.getByGrade);
 
   return router;
 }

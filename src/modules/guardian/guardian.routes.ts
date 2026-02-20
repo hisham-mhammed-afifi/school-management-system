@@ -37,7 +37,7 @@ export function createGuardianRoutes(controller: GuardianController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('guardians.view'), controller.list);
+  router.get('/', requirePermission('guardians.list'), controller.list);
 
   /**
    * @openapi
@@ -72,7 +72,7 @@ export function createGuardianRoutes(controller: GuardianController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('guardians.view'), controller.getById);
+  router.get('/:id', requirePermission('guardians.read'), controller.getById);
 
   /**
    * @openapi

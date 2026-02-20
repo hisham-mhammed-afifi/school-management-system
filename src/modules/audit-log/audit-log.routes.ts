@@ -68,7 +68,7 @@ export function createAuditLogRoutes(controller: AuditLogController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('audit.view'), controller.list);
+  router.get('/', requirePermission('audit-logs.list'), controller.list);
 
   /**
    * @openapi
@@ -103,7 +103,7 @@ export function createAuditLogRoutes(controller: AuditLogController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('audit.view'), controller.getById);
+  router.get('/:id', requirePermission('audit-logs.read'), controller.getById);
 
   return router;
 }

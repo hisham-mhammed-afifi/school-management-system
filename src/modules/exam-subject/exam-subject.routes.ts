@@ -44,7 +44,7 @@ export function createExamSubjectRoutes(controller: ExamSubjectController): Rout
    *       404:
    *         description: Exam not found
    */
-  router.get('/', requirePermission('exams.view'), controller.list);
+  router.get('/', requirePermission('exam-subjects.list'), controller.list);
 
   /**
    * @openapi
@@ -110,7 +110,7 @@ export function createExamSubjectRoutes(controller: ExamSubjectController): Rout
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/', requirePermission('exams.manage'), controller.create);
+  router.post('/', requirePermission('exam-subjects.create'), controller.create);
 
   /**
    * @openapi
@@ -164,7 +164,7 @@ export function createExamSubjectRoutes(controller: ExamSubjectController): Rout
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.patch('/:id', requirePermission('exams.manage'), controller.update);
+  router.patch('/:id', requirePermission('exam-subjects.update'), controller.update);
 
   /**
    * @openapi
@@ -202,7 +202,7 @@ export function createExamSubjectRoutes(controller: ExamSubjectController): Rout
    *       409:
    *         description: Cannot remove subject with existing grades
    */
-  router.delete('/:id', requirePermission('exams.manage'), controller.remove);
+  router.delete('/:id', requirePermission('exam-subjects.delete'), controller.remove);
 
   return router;
 }

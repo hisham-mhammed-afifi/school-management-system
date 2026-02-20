@@ -34,7 +34,7 @@ export function createDashboardRoutes(controller: DashboardController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/overview', requirePermission('dashboard.view'), controller.overview);
+  router.get('/overview', requirePermission('dashboard.read'), controller.overview);
 
   /**
    * @openapi
@@ -63,7 +63,7 @@ export function createDashboardRoutes(controller: DashboardController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/attendance-today', requirePermission('dashboard.view'), controller.attendanceToday);
+  router.get('/attendance-today', requirePermission('dashboard.read'), controller.attendanceToday);
 
   /**
    * @openapi
@@ -101,7 +101,7 @@ export function createDashboardRoutes(controller: DashboardController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/fees-summary', requirePermission('dashboard.view'), controller.feesSummary);
+  router.get('/fees-summary', requirePermission('dashboard.read'), controller.feesSummary);
 
   /**
    * @openapi
@@ -150,7 +150,7 @@ export function createDashboardRoutes(controller: DashboardController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/recent-activity', requirePermission('dashboard.view'), controller.recentActivity);
+  router.get('/recent-activity', requirePermission('dashboard.read'), controller.recentActivity);
 
   return router;
 }

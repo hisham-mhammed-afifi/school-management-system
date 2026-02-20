@@ -179,7 +179,7 @@ export function createNotificationRoutes(controller: NotificationController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/send', requirePermission('notifications.send'), controller.send);
+  router.post('/send', requirePermission('notifications.create'), controller.send);
 
   return router;
 }

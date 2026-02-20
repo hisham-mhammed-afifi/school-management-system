@@ -57,7 +57,7 @@ export function createAcademicEventRoutes(controller: AcademicEventController): 
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('events.view'), controller.list);
+  router.get('/', requirePermission('academic-events.list'), controller.list);
 
   /**
    * @openapi
@@ -92,7 +92,7 @@ export function createAcademicEventRoutes(controller: AcademicEventController): 
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('events.view'), controller.getById);
+  router.get('/:id', requirePermission('academic-events.read'), controller.getById);
 
   /**
    * @openapi
@@ -155,7 +155,7 @@ export function createAcademicEventRoutes(controller: AcademicEventController): 
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/', requirePermission('events.create'), controller.create);
+  router.post('/', requirePermission('academic-events.create'), controller.create);
 
   /**
    * @openapi
@@ -206,7 +206,7 @@ export function createAcademicEventRoutes(controller: AcademicEventController): 
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.patch('/:id', requirePermission('events.update'), controller.update);
+  router.patch('/:id', requirePermission('academic-events.update'), controller.update);
 
   /**
    * @openapi
@@ -233,7 +233,7 @@ export function createAcademicEventRoutes(controller: AcademicEventController): 
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.delete('/:id', requirePermission('events.delete'), controller.remove);
+  router.delete('/:id', requirePermission('academic-events.delete'), controller.remove);
 
   return router;
 }

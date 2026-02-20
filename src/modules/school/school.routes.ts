@@ -327,7 +327,7 @@ export function createSchoolProfileRoutes(controller: SchoolController): Router 
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('school.view'), controller.getProfile);
+  router.get('/', requirePermission('school.read'), controller.getProfile);
 
   /**
    * @openapi

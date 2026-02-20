@@ -61,7 +61,7 @@ export function createSubstitutionRoutes(controller: SubstitutionController): Ro
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('substitutions.view'), controller.list);
+  router.get('/', requirePermission('substitutions.list'), controller.list);
 
   /**
    * @openapi
@@ -96,7 +96,7 @@ export function createSubstitutionRoutes(controller: SubstitutionController): Ro
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('substitutions.view'), controller.getById);
+  router.get('/:id', requirePermission('substitutions.read'), controller.getById);
 
   /**
    * @openapi

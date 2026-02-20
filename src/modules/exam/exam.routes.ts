@@ -63,7 +63,7 @@ export function createExamRoutes(controller: ExamController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('exams.view'), controller.list);
+  router.get('/', requirePermission('exams.list'), controller.list);
 
   /**
    * @openapi
@@ -98,7 +98,7 @@ export function createExamRoutes(controller: ExamController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('exams.view'), controller.getById);
+  router.get('/:id', requirePermission('exams.read'), controller.getById);
 
   /**
    * @openapi

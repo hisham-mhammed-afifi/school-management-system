@@ -39,7 +39,7 @@ export function createGradeRoutes(controller: GradeController): Router {
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('grades.view'), controller.list);
+  router.get('/', requirePermission('grades.list'), controller.list);
 
   /**
    * @openapi
@@ -74,7 +74,7 @@ export function createGradeRoutes(controller: GradeController): Router {
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('grades.view'), controller.getById);
+  router.get('/:id', requirePermission('grades.read'), controller.getById);
 
   /**
    * @openapi

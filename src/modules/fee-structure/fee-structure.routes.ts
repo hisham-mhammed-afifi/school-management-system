@@ -56,7 +56,7 @@ export function createFeeStructureRoutes(controller: FeeStructureController): Ro
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('fees.view'), controller.list);
+  router.get('/', requirePermission('fee-structures.list'), controller.list);
 
   /**
    * @openapi
@@ -129,7 +129,7 @@ export function createFeeStructureRoutes(controller: FeeStructureController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/', requirePermission('fees.manage'), controller.create);
+  router.post('/', requirePermission('fee-structures.create'), controller.create);
 
   /**
    * @openapi
@@ -184,7 +184,7 @@ export function createFeeStructureRoutes(controller: FeeStructureController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.patch('/:id', requirePermission('fees.manage'), controller.update);
+  router.patch('/:id', requirePermission('fee-structures.update'), controller.update);
 
   /**
    * @openapi
@@ -213,7 +213,7 @@ export function createFeeStructureRoutes(controller: FeeStructureController): Ro
    *       409:
    *         description: Cannot delete structure with associated invoices
    */
-  router.delete('/:id', requirePermission('fees.manage'), controller.remove);
+  router.delete('/:id', requirePermission('fee-structures.delete'), controller.remove);
 
   return router;
 }

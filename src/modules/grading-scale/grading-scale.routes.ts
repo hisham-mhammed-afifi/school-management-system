@@ -39,7 +39,7 @@ export function createGradingScaleRoutes(controller: GradingScaleController): Ro
    *       403:
    *         $ref: '#/components/responses/Forbidden'
    */
-  router.get('/', requirePermission('grading.view'), controller.list);
+  router.get('/', requirePermission('grading-scales.list'), controller.list);
 
   /**
    * @openapi
@@ -76,7 +76,7 @@ export function createGradingScaleRoutes(controller: GradingScaleController): Ro
    *       404:
    *         $ref: '#/components/responses/NotFound'
    */
-  router.get('/:id', requirePermission('grading.view'), controller.getById);
+  router.get('/:id', requirePermission('grading-scales.read'), controller.getById);
 
   /**
    * @openapi
@@ -146,7 +146,7 @@ export function createGradingScaleRoutes(controller: GradingScaleController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.post('/', requirePermission('grading.manage'), controller.create);
+  router.post('/', requirePermission('grading-scales.create'), controller.create);
 
   /**
    * @openapi
@@ -202,7 +202,7 @@ export function createGradingScaleRoutes(controller: GradingScaleController): Ro
    *       422:
    *         $ref: '#/components/responses/ValidationError'
    */
-  router.patch('/:id', requirePermission('grading.manage'), controller.update);
+  router.patch('/:id', requirePermission('grading-scales.update'), controller.update);
 
   /**
    * @openapi
@@ -231,7 +231,7 @@ export function createGradingScaleRoutes(controller: GradingScaleController): Ro
    *       409:
    *         description: Cannot delete grading scale with associated data
    */
-  router.delete('/:id', requirePermission('grading.manage'), controller.remove);
+  router.delete('/:id', requirePermission('grading-scales.delete'), controller.remove);
 
   return router;
 }
