@@ -19,6 +19,7 @@
     "db:migrate:prod": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:seed": "node --env-file=.env prisma/seed.ts",
+    "db:seed:demo": "node --env-file=.env prisma/seed-demo.ts",
     "db:studio": "prisma studio"
   },
   "dependencies": {
